@@ -1,7 +1,7 @@
-
+sync-to-cloud.sh
 
 # SYNC LOCAL VERSION OF WEBSITE TO GU-DOMAINS SERVER
-#rsync -alvr 501-project-website INSERT_USER_NAME@gtown.reclaimhosting.com:/home/INSERT_USER_NAME/public_html/
+#rsync -alvr 501-project-website yanyange@gtown.reclaimhosting.com:/home/yanyange/public_html/
 
 # PUSH GIT REPO TO THE CLOUD FOR BACKUP
 DATE=$(date +"DATE-%Y-%m-%d-TIME-%H-%M-%S")
