@@ -1,5 +1,3 @@
-sync-to-cloud.sh
-
 # SYNC LOCAL VERSION OF WEBSITE TO GU-DOMAINS SERVER
 #rsync -alvr 501-project-website yanyange@gtown.reclaimhosting.com:/home/yanyange/public_html/
 
