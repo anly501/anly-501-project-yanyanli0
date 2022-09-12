@@ -1,0 +1,58 @@
+---
+title: "500_drug_crime_data"
+author: "Yanyan Li"
+date: "2022-09-11"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+```{r}
+library(jsonlite)
+library(httr)
+
+```
+
+
+
+```{r cars}
+
+
+url <- "https://brianiswu-otreeba-open-cannabis-v1.p.rapidapi.com/seed-companies"
+
+response <- VERB("GET", url, add_headers('X-RapidAPI-Key' = '58a3031182msh2dd7d400dbe0f8fp1aec77jsn4e2babdc444a', 'X-RapidAPI-Host' = 'brianiswu-otreeba-open-cannabis-v1.p.rapidapi.com'), content_type("application/octet-stream"))
+
+
+
+
+```
+
+## Including Plots
+```{r}
+#
+data <- jsonlite::fromJSON(rawToChar(response$content))
+data
+```
+
+
+```{r}
+response <- GET("https://api.fda.gov/drug/event.json?limit=500")
+
+content <- fromJSON(rawToChar(response$content))
+
+res <- content$results
+```
+
+
+```{r}
+res
+```
+
+```{r}
+save(res, file="500_drug_crime_data.RData")
+```
+
+
