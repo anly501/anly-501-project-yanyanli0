@@ -1,0 +1,122 @@
+---
+title: "Alchohol_Drug_Abuse"
+author: "Yanyan Li"
+date: "2022-09-26"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+
+
+```{r 1}
+library(ggplot2)
+library('tidyverse')
+library(dplyr)
+
+alchohol_df<-read.csv("./2012-2014_Alcohol_abuse.csv")
+drug_df<-read.csv("./2012-2014_Drug_abuse.csv")
+```
+
+
+```{r}
+head(alchohol_df)
+```
+
+```{r}
+head(drug_df)
+```
+
+
+```{r}
+#check if nan is in the dataset
+colSums(is.na(alchohol_df))
+colSums(is.na(drug_df))
+```
+
+
+
+```{r 2}
+#check if two databse have same map id
+any(alchohol_df$Map.Group == drug_df$Map.Group)
+```
+
+
+```{r 3}
+#rename two database
+alchohol_df <- alchohol_df %>% rename("rate_lower"="X95..CI..Lower.","rate_upper"="X95..CI..Upper.")
+drug_df <- drug_df %>% rename("rate_lower"="X95..CI..Lower.","rate_upper"="X95..CI..Upper.")
+```
+
+
+```{r 4}
+#remove duplicate unrelated rows
+alchohol_df$Substate.Region<-NULL
+drug_df$Substate.Region<-NULL
+```
+
+
+```{r 5}
+#type caste
+alchohol_df$rate_lower<-as.numeric(sub("%", "", alchohol_df$rate_lower))
+alchohol_df$rate_upper<-as.numeric(sub("%", "", alchohol_df$rate_upper))
+
+drug_df$rate_lower<-as.numeric(sub("%", "", drug_df$rate_lower))
+drug_df$rate_upper<-as.numeric(sub("%", "", drug_df$rate_upper))
+```
+
+
+
+```{r 6}
+#visualize the abouse rate
+
+alchohol_rate_plot<- ggplot(alchohol_df, aes(x=rate_lower, y=rate_upper)) + 
+  scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+
+  scale_y_discrete(guide = guide_axis(check.overlap = TRUE))+
+  geom_point() +labs(title="Achohol abuse rate")
+  
+alchohol_rate_plot
+```
+
+```{r 7}
+drug_rate_plot<- ggplot(drug_df, aes(x=rate_lower, y=rate_upper)) + 
+  scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+
+  scale_y_discrete(guide = guide_axis(check.overlap = TRUE))+
+  geom_point() +labs(title="Drug abuse rate")
+
+drug_rate_plot
+
+```
+
+
+```{r 8}
+#Remove outliers
+
+sort_Alchohol<-alchohol_df[order(alchohol_df$rate_lower,alchohol_df$rate_upper,decreasing = TRUE),]
+sort_Alchohol<- sort_Alchohol[-c(1:7),]
+
+nonoulier_alchohol<-ggplot(sort_Alchohol, aes(x=rate_lower, y=rate_upper)) + 
+  scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+
+  scale_y_discrete(guide = guide_axis(check.overlap = TRUE))+
+  geom_point() +labs(title="Achohol abuse rate (After cleaning)")
+
+nonoulier_alchohol
+
+```
+```{r}
+#Remove outliers
+
+sort_drug<-drug_df[order(drug_df$rate_lower,drug_df$rate_upper,decreasing = TRUE),]
+sort_drug<- sort_drug[-c(1:2),]
+
+nonoulier_drug<-ggplot(sort_drug, aes(x=rate_lower, y=rate_upper)) + 
+  scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+
+  scale_y_discrete(guide = guide_axis(check.overlap = TRUE))+
+  geom_point() +labs(title="Drug abuse rate (After cleaning)")
+
+nonoulier_drug
+```
+
