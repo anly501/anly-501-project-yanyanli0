@@ -2,25 +2,52 @@
 <html>
 <body>
 
-<h1>Data Cleaning Python</h1>
+<h1>Data Exploring</h1>
+<a href="https://github.com/anly501/anly-501-project-yanyanli0/tree/main/codes/01-data-gathering">The code for reference</a>
+<h2> Text Data   </h2>
 
-<p>Here is the 
-    <a href="https://github.com/anly501/anly-501-project-yanyanli0/tree/main/codes/01-data-gathering">collection of 2500 tweets</a>
-    </p>
-<h3>Pre-review the data set</h3>
-<img src="../images/text_data.PNG" width="500" height="200">
-<p> Select the Date, Language and Text we need and only select Language = 'en' data for the feature analysis. see below</p>
-<img src="../images/3_text_data.PNG" width="500" height="300">
-<h3> Check the validation of values</h3>
-See if there any Nan in the datasets
-<h3> Get the Text data and Use CountVectorizer to count each word</h3>
-Here is the text data and the word counts after using CountVectorizer
-<li><img src="../images/text_tweet.PNG" width="500" height="400"></li> 
-<li><img src="../images/noncleaned_data.PNG" width="400" height="200"></li>  
-<p> we still can see a lot of Stop words like "all", "the", "a" etc and some digits. So, let's remove them</p>
-<h3> Remove the stop words, digits and some non-word strings</h3>
-<p>below is the data set after removing all unrelated symbols.</p> 
-<img src="../images/cleaned_data.PNG" width="400" height="200"> 
-<p> we can see there is no more symbols, stopwords, numbers and non-word strings in the text</p>
+
+
+<h3> World Cloud</h3>
+
+
+<p>
+    Open the cleaned tweets data and apply Wold Cloud to the all text, I got 
+</p>
+<img src="../images/word_cloud.png" width="400" height="400">
+<p> So from the wold Cloud we can clearly see the most outstanding words are "Weed","Marijuana", and "Cannabis" etc.
+    They are our target words. 
+    <br>Also, we can see some words like "Good", "Bad", "don't" etc. to represent people's views or emotions on Marijuana. So let's analysis the tone or mood of each tweets.
+</p>
+<h3> Analysis People's Views on Marijuana</h3>
+<p> Here I am going to use the function called "SentimentIntensityAnalyzer" to analysis the tone of each tweets.
+    For each tweet, we'll get four values, corresponding to "negative", "neutral", "positive" and "compound". The first three values will be in the range 0 to 1, 
+    the last value representing the combination of the first three values will be in the range -1 to 1. If the tone of this tweet represents a like, the compound value will be close to 1, 
+    and if the tone of this tweet is a hate, it will be close to -1.
+     <figure class="half">
+        <img src="../images/tone _tweet.PNG" width="200" height="250" />
+        <figcaption> This is the score table for each tweet</figcaption>
+        <img  src="../images/tone_des.PNG" width="300" height="200" />
+        <figcaption> This is the descriptive statistics of score table</figcaption>
+     </figure>
+     <P> As we can see the values from the table, "neutral" has hightest mean comparing the "negative" and "positive" score, which means majority of people have neutral feeling about it</P>
+     Take look at "compound" values, its mean are 0.093621 which close to 0 so we can confirm that most people don't care about the weed. 
+    </P>    
+</p>
+<h3> Histogram of the distribution of tone score </h3>    
+    <img src="../images/score_his.png" width="400" height="350" />
+<p> The histogram provides us more straight forward information. From this histogram, we can see that the orange category occupies a higher score, which means that more people are neutral about cannabis. </p>
+     It actually match the our descriptive statistical table of tone score. 
+</p>
+<h3>Label the Text with tone</h3>
+    Since we got tone score for each tweet, we can add the tone score to the dataset.<br>
+    <img src="../images/label_tone.PNG" width="400" height="200" />
+<h2>Numerical Data</h2>
+Now let's analysis numerical data. The plot shown below is the small area estimated crime rate. Based on two different types Alcohol and Drug, there are two different color of point.
+<br><img src="../images/al_dr_hist.png" width="500" height="400" />
+<br>From the graph, we can see almost all the blue points are on the top of orange points, which means the crime rate caused by alcohol is much higher than marijuana.
+<br> Here is the descriptive statistics of crime rate table.
+<br><img src="../images/al_dr_mean.PNG" width="300" height="100" />
+<br> According to this table, we can pretty sure that drinking is more likely to commit crime than smoke marijuana
 </body>
 </html>

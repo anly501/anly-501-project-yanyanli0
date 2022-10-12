@@ -1,5 +1,5 @@
 ---
-title: "Alchohol_Drug_Abuse"
+title: "alcohol_Drug_Abuse"
 author: "Yanyan Li"
 date: "2022-09-26"
 output: html_document
@@ -17,13 +17,13 @@ library(ggplot2)
 library('tidyverse')
 library(dplyr)
 
-alchohol_df<-read.csv("./2012-2014_Alcohol_abuse.csv")
+alcohol_df<-read.csv("./2012-2014_Alcohol_abuse.csv")
 drug_df<-read.csv("./2012-2014_Drug_abuse.csv")
 ```
 
 
 ```{r}
-head(alchohol_df)
+head(alcohol_df)
 ```
 
 ```{r}
@@ -32,53 +32,66 @@ head(drug_df)
 
 
 ```{r}
-#check if nan is in the dataset
-colSums(is.na(alchohol_df))
+#check if nan is in the data set
+colSums(is.na(alcohol_df))
 colSums(is.na(drug_df))
+```
+```{r}
+any(alcohol_df>0)
+any(drug_df>0)
 ```
 
 
 
 ```{r 2}
 #check if two databse have same map id
-any(alchohol_df$Map.Group == drug_df$Map.Group)
+any(alcohol_df$Map.Group == drug_df$Map.Group)
 ```
 
 
 ```{r 3}
 #rename two database
-alchohol_df <- alchohol_df %>% rename("rate_lower"="X95..CI..Lower.","rate_upper"="X95..CI..Upper.")
-drug_df <- drug_df %>% rename("rate_lower"="X95..CI..Lower.","rate_upper"="X95..CI..Upper.")
+alcohol_df <- alcohol_df %>% rename("rate_lower"="X95..CI..Lower.","rate_upper"="X95..CI..Upper.","small_area_estimate"="Small..Area.Estimate")
+drug_df <- drug_df %>% rename("rate_lower"="X95..CI..Lower.","rate_upper"="X95..CI..Upper.","small_area_estimate"="Small..Area.Estimate")
 ```
 
 
 ```{r 4}
 #remove duplicate unrelated rows
-alchohol_df$Substate.Region<-NULL
+alcohol_df$Substate.Region<-NULL
 drug_df$Substate.Region<-NULL
 ```
 
 
 ```{r 5}
-#type caste
-alchohol_df$rate_lower<-as.numeric(sub("%", "", alchohol_df$rate_lower))
-alchohol_df$rate_upper<-as.numeric(sub("%", "", alchohol_df$rate_upper))
+#remove the % sign
+alcohol_df$rate_lower<-as.numeric(sub("%", "", alcohol_df$rate_lower))
+alcohol_df$rate_upper<-as.numeric(sub("%", "", alcohol_df$rate_upper))
+alcohol_df$small_area_estimate<-as.numeric(sub("%", "", alcohol_df$small_area_estimate))
 
 drug_df$rate_lower<-as.numeric(sub("%", "", drug_df$rate_lower))
 drug_df$rate_upper<-as.numeric(sub("%", "", drug_df$rate_upper))
+drug_df$small_area_estimate<-as.numeric(sub("%", "", drug_df$small_area_estimate))
+```
+
+```{r}
+alcohol_df$Small..Area.Estimate<-NULL
+head(alcohol_df)
+head(drug_df)
 ```
 
 
 
-```{r 6}
-#visualize the abouse rate
 
-alchohol_rate_plot<- ggplot(alchohol_df, aes(x=rate_lower, y=rate_upper)) + 
+```{r 6}
+#visualize the abuse rate
+
+alcohol_rate_plot<- ggplot(alcohol_df, aes(x=rate_lower, y=rate_upper)) + 
   scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+
   scale_y_discrete(guide = guide_axis(check.overlap = TRUE))+
   geom_point() +labs(title="Achohol abuse rate")
   
-alchohol_rate_plot
+alcohol_rate_plot
 ```
 
 ```{r 7}
@@ -95,15 +108,15 @@ drug_rate_plot
 ```{r 8}
 #Remove outliers
 
-sort_Alchohol<-alchohol_df[order(alchohol_df$rate_lower,alchohol_df$rate_upper,decreasing = TRUE),]
-sort_Alchohol<- sort_Alchohol[-c(1:7),]
+sort_alcohol<-alcohol_df[order(alcohol_df$rate_lower,alcohol_df$rate_upper,decreasing = TRUE),]
+sort_alcohol<- sort_alcohol[-c(1:7),]
 
-nonoulier_alchohol<-ggplot(sort_Alchohol, aes(x=rate_lower, y=rate_upper)) + 
+nonoulier_alcohol<-ggplot(sort_alcohol, aes(x=rate_lower, y=rate_upper)) + 
   scale_x_discrete(guide = guide_axis(check.overlap = TRUE))+
   scale_y_discrete(guide = guide_axis(check.overlap = TRUE))+
   geom_point() +labs(title="Achohol abuse rate (After cleaning)")
 
-nonoulier_alchohol
+nonoulier_alcohol
 
 ```
 ```{r}
@@ -118,5 +131,20 @@ nonoulier_drug<-ggplot(sort_drug, aes(x=rate_lower, y=rate_upper)) +
   geom_point() +labs(title="Drug abuse rate (After cleaning)")
 
 nonoulier_drug
+```
+
+```{r}
+write.csv(sort_alcohol,'alcohol_abouse_r.csv')
+
+write.csv(sort_drug,'Drug_abouse_r.csv')
+
+```
+
+```{r}
+#combine the two datasets and label them
+alcohol_df$type<-"Alcohol"
+drug_df$type<-"Drug"
+
+alcohol_drug_df<-rbind(alcohol_df,drug_df)
 ```
 

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Naïve Bayes Python</h1>
+<p>This the dataset I will use for the Naïve Bayes model</p>
+<p>And this is the  <a href="https://github.com/anly501/anly-501-project-yanyanli0/tree/main/codes/01-data-gathering">Code for reference</a></p>
+
+<h2>Prepare the Data</h2>
+<p>The dataset we are going to use for this section consists of 5 columns and 2500 rows. We are going to choose
+    column "Text" and column "Tone", and apply Naïve Bayes classification to classify the tone of each Text.  </p>
+<li> <b>Select column "clean_text" and column "tone"</b></li>
+<img src="../images/clean_df_and_tone.PNG" width="500" height="400">
+<li> <b>Change the values in the column "tone"</b></li>
+<ul>
+    <li>set value = -1 for the values in range [-1,0), represents the negative tone</li>
+    <li>set value = 1 for the values in range (0,1], represents the positive tone</li>
+    <li>set value = 0 for the values is equal to 0, represents the neutral tone</li>
+</ul>
+<img src="../images/label_tone.PNG" width="500" height="400">
+
+<h2>Data Modelling (Naïve Bayes classification)</h2>
+<li> <b>Vectorize the Text </b></li>
+<p>Text Vectorization is the process of converting text into numerical representation </p>
+<img src="../images/vectorizer.PNG" width="500" height="400">
+
+
+<li> <b>Built up the train dataset and the test dataset</b></li>
+<p>We split the dataset into two parts. One part is used for train the model and another part is used for testing the model performance</p>
+<p>We are performing a train test split on our dataset. We are providing the test size as 0.20, that means our training sample contains 2000 training set and test sample contains 500 test set</p>
+<img src="../images/train_test_py.PNG" width="500" height="400">
+
+<li> <b>Train the MultinomialNB model</b></li>
+<p>We use the MultinomialNB from scipy and put the train test in</p>
+
+
+<h2>Model Evaluation</h2>
+<li> <b>Result Summary</b></li>
+<img src="../images/model_summary_py.PNG" width="500" height="400">
+<p>As we can see above, the accuracy of train data is 91.15% and we got 177 mislabeled text out of a total 2000 text</p>
+<p>For the test data, we only got 67.2% accuracy and there are 164 mislabeled text out of a total 500 text</p>
+<li> <b>Confusion Matrix</b></li>
+<img src="../images/confusion_py.PNG" width="500" height="400">
+<br>
+<p> Explanation for the Result</p>
+<LI>True Positive</LI>
+    <ul>
+        <li>The True Positive for the negative tone is 85, which means 85 texts with negative tone are correctly classified. </li>
+        <li>The True Positive for the positive tone is 80, which means 85 texts with positive tone are correctly classified.</li>
+        <li>The True Positive for the neutral tone is 170, which means 170 texts with neutral tone are correctly classified.</li>
+    </ul>
+<LI>True Negative</LI>
+    <ul>    
+        <li>The True Negative for the negative tone is 14+26+13+37 = 90</li>
+        <li>The True Negative for the positive tone is 13+18+14+56 = 101</li>
+        <li>The True Negative for the neutral tone is 26+18+37+56  = 137</li>
+    </ul>
+<LI>False Positive</LI>
+    <ul>
+        <li>The False Positive for the negative tone is 14+26 = 40, which means 40 texts with non-negative tone are incorrectly classified as negative</li>
+        <li>The False Positive for the positive tone is 13+18 = 31, which means 31 texts with non-positive tone are incorrectly classified as positive</li>
+        <li>The False Positive for the neutral tone is 37+56 = 93, which means 93 texts with non-neutral tone are incorrectly classified as neutral</li>
+    </ul>
+<LI>False Negative</LI>
+    <ul>    
+        <li>The False Negative for the negative tone is 13+37 = 50, which means 50 texts with negative tone are incorrectly classified</li>
+        <li>The False Negative for the negative tone is 14+56 = 70, which means 70 texts with positive tone are incorrectly classified</li>
+        <li>The False Negative for the negative tone is 26+18 = 44, which means 44 texts with neutral tone are incorrectly classified</li>
+
+    </ul>
+<h2>Conclusion</h2>
+<p>We tokenize the 2500 Tweets into single words and vectorized them as a matrix. By applying the MultinomialNB from scipy, we can successfully predict 91% of data from train set and 67% of data from 
+    test set. Since we have 3 different labels which are "Negative", "Positive" and "Neutral", I think 67% accuracy is good enough for the model with 3 different labels. Also, based on the confusion matrix
+    , the values of TP and TN is much higher than FP and FN, so the model is able to predict the correct tone of the input text.
+     </p>
+
+</body>
+</html>

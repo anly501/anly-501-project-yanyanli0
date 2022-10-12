@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Naïve Bayes R</h1>
+<p>This the dataset I will use for the Naïve Bayes model</p>
+<p>And this is the  <a href="https://github.com/anly501/anly-501-project-yanyanli0/tree/main/codes/01-data-gathering">Code for reference</a></p>
+
+<h2>Prepare the Data</h2>
+<p>The dataset we are going to use for this section consists of 8 columns and 930 rows. We are going to choose
+    column "rate_lower", column "rate_upper" and column "type", and apply Naïve Bayes classification to classify the type of the crime rate. 
+    "rate_lower" and "rate_upper" represents the boundary of crime rate and "type" represents whether the crime rate is due to alcohol or marijuana </p>
+<li> <b>Select column  column "rate_lower", column "rate_upper" and column "type"</b></li>
+<img src="../images/crime _rate1.PNG" width="500" height="300">
+<img src="../images/crime _rate2.PNG" width="500" height="300">
+<li> <b>Data Summary</b></li>
+
+<img src="../images/crime_rate_summary.PNG" width="500" height="300">
+
+
+<li> <b>Normalize data </b></li>
+<p>Data normalization is the organization of data to appear similar across all records and fields. It increases the cohesion of entry types leading to cleansing, lead generation, segmentation, and higher quality data. </p>
+<img src="../images/crime_rate_normal.PNG" width="500" height="400">
+
+<li> <b>Correlation Matrix</b></li>
+<p>The matrix depicts the correlation between all the possible pairs of values in a table. It is a powerful tool to summarize a large dataset and to identify and visualize patterns in the given data</p>
+<img src="../images/crime_rate_corr.PNG" width="500" height="400">
+<img src="../images/crime_rate_pair.PNG" width="500" height="400">
+<p>Since the correlation heat map shows two variables are highly correlated, we can drop one of the variables and take one variable as our feature</p>
+
+<li> <b>Remove Redundancy</b></li>
+<p> By taking mean of the upper crime rate and lower crime rate as mean crime rate.</p>
+<img src="../images/crime _rate_distribution.PNG" width="500" height="400">
+<p>
+    this is the distribution of mean crime rate. since it is not normally distributed, we cannot use Gaussian Naïve Bayes classification in this case
+</p>
+
+<h2>Data Modelling (Naïve Bayes classification)</h2>
+<li> <b>Built up the train dataset and the test dataset</b></li>
+<p>We split the dataset into two parts. One part is used for train the model and another part is used for testing the model performance</p>
+<p>We are performing a train test split on our dataset. We are providing the test size as 0.20, that means our training sample contains 744 training set and test sample contains 186 test set</p>
+
+<li> <b>Train the Naïve Bayes model</b></li>
+<p>We use the Naïve Bayes and put the train test in</p>
+
+
+<h2>Model Evaluation</h2>
+<li> <b>Result Summary</b></li>
+<img src="../images/crime_rate_test.PNG" width="250" height="300">
+<img src="../images/crime_rate_train.PNG" width="250" height="300">
+<p>As we can see above, the accuracy of train data is 99.6% and we got 3 mislabeled crime rate out of a total 744 crime rate</p>
+<p>For the test data, we only got 100% accuracy and there are no mislabeled crime rates</p>
+<li> <b>Confusion Matrix</b></li>
+<img src="../images/crime _rate_conf.PNG" width="500" height="400">
+<br>
+<p> Explanation for the Result</p>
+<LI>True Positive</LI>
+    <ul>
+        <li>The True Positive for the Alcohol is 93, which means 93 crime rates with Alcohol label are correctly classified. </li>
+        <li>The True Positive for the Drug is 93, which means 93 crime rates with Drug label are correctly classified.</li>
+       
+    </ul>
+<LI>True Negative</LI>
+    <ul>    
+        <li>The True Negative for the Alcohol is 0</li>
+        <li>The True Negative for the Drug is 0</li>
+    </ul>
+<LI>False Positive</LI>
+    <ul>
+        <li>The False Positive for the Alcohol is 0</li>
+        <li>The False Positive for the Drug is 0</li>
+    </ul>
+<LI>False Negative</LI>
+    <ul>    
+        <li>The False Negative for the Alcohol is 0</li>
+        <li>The False Negative for the Drug is 0</li>
+    </ul>
+<h2>Conclusion</h2>
+<p>We applied the Naïve Bayes classification on the crime rates and label them with two different labels. The model are perfectly predicting the label for each crime rates in train set and test set.
+    The reason why the accuracy is so hight I guess it is because the Alcohol crime rates are much higher than Drug and the difference in their crime rate is very significant.
+     </p>
+
+</body>
+</html>

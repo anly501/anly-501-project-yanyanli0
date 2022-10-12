@@ -16,24 +16,27 @@
     </p>
     <p>Here are the 
         <a href="https://github.com/anly501/anly-501-project-yanyanli0/tree/main/codes/01-data-gathering">two cleaned datasets</a>
-    </p>
-    <p> Alchohol datasets 
-        <br>
-        It has 465 rows and 7 columns which are Order,State,Substate Region,"Small Area Estimate",95% CI (Lower),95% CI (Upper),Map Group </p>
+    
+    and this is the <a href="https://github.com/anly501/anly-501-project-yanyanli0/tree/main/codes/02-data-cleaning">code for reference</a>
+</p>    
+    <p> <h5>Alcohol datasets </h5>
+        It has 465 rows and 7 columns which are Order,State, Substate Region, Small Area Estimate, 95% CI (Lower), 95% CI (Upper), Map Group </p>
     <img src="../images/alchohol_og.PNG" width="500" height="200">
 
-    <p> Drug datasets <br>
-        It has 465 rows and 7 columns and has exactly same columns name as Alchohol
+    <p><h5> Drug datasets </h5>
+        It has 465 rows and 7 columns and has exactly same columns name as Alcohol dataset
     </p>
     <img src="../images/drug_og.PNG" width="500" height="200">
-<h3> Check the Missing values in each columns</h3>
-    <p>I checked each columns on both datasets and there is no missing values for both datasets</p>
-<h3> Remove unrelated columns  </h3>
+<h3> Check the if there any Missing values and value validation</h3>
+    <p>I checked each columns on both datasets and there is no missing values for both datasets. Also, all the values in both datasets are greater than 0</p>
+    <img src="../images/check _nan.PNG" width="500" height="200">
+<h3> Remove unrelated columns, Type casting and Rename the columns  </h3>
+    <p> Make the column's name short and easier to read</p>
     <p> Since the "Substate.Region" has duplicated info as State, so I dropped it for both datasets</p>
-<h3> Type casting</h3>
-    <p> Remove the "%" sign for all the cells and convert the all number-liks strings to nummeric data type</p>
+    <p> Remove the "%" sign for all the cells and convert the all number-like strings to numeric data type</p>
+    <img src="../images/remove_$.PNG" width="500" height="200">
 <h3> Visualize the data </h3>
-    <p> Alchohol dataset: lower abuse rate vs upper abuse rate</p>
+    <p> Alcohol dataset: lower abuse rate vs upper abuse rate</p>
     <img src="../images/outlier_al.PNG" width="500" height="400">
     <p> Drug dataset: lower abuse rate vs upper abuse rate</p>
     <img src="../images/outlier_dr.PNG" width="500" height="400">
@@ -44,9 +47,11 @@
     <p> After removing the ouliers</p> 
     <img src="../images/nonoutlier_dr.PNG" width="500" height="400">
 <Summary> 
-    The new Alchohol dataset only has 458 rows and 6 columns and Drug dataset only has 463 rows and 6 columns
-    <br>
-    So, Alchohol dataset was reduced by 15.57% and Drug dataset was reduced by 14.65%
+    The new Alcohol dataset only has 458 rows and 6 columns and Drug dataset only has 463 rows and 6 columns
+    So, Alcohol dataset was reduced by 15.57% and Drug dataset was reduced by 14.65%
 </Summary>
+<h3> Combine two datasets and label them</h3>
+    Since two datasets have exactly same columns, we can combine them into one dataset and add one more column to describe what type of abuse for each record.
+    <br><img src="../images/alcohol_drug_df.PNG" width="500" height="200">
 </body>
 </html>
