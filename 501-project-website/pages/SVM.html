@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.242">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>svm</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="SVM_files/libs/clipboard/clipboard.min.js"></script>
+<script src="SVM_files/libs/quarto-html/quarto.js"></script>
+<script src="SVM_files/libs/quarto-html/popper.min.js"></script>
+<script src="SVM_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="SVM_files/libs/quarto-html/anchor.min.js"></script>
+<link href="SVM_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="SVM_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="SVM_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="SVM_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="SVM_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contents</h2>
+   
+  <ul>
+  <li><a href="#introduction-to-support-vector-machinesvm" id="toc-introduction-to-support-vector-machinesvm" class="nav-link active" data-scroll-target="#introduction-to-support-vector-machinesvm">01. Introduction to Support Vector Machine(SVM)</a></li>
+  <li><a href="#data-pre-processing" id="toc-data-pre-processing" class="nav-link" data-scroll-target="#data-pre-processing">02. Data pre-processing</a></li>
+  <li><a href="#distribution-of-class-labels" id="toc-distribution-of-class-labels" class="nav-link" data-scroll-target="#distribution-of-class-labels">03. Distribution of Class labels</a></li>
+  <li><a href="#baseline-model-for-comparison" id="toc-baseline-model-for-comparison" class="nav-link" data-scroll-target="#baseline-model-for-comparison">04. Baseline model for comparison</a></li>
+  <li><a href="#data-modelling-svm-classification" id="toc-data-modelling-svm-classification" class="nav-link" data-scroll-target="#data-modelling-svm-classification">05. Data Modelling (SVM Classification)</a></li>
+  <li><a href="#hyperparameter-optimization-model-tuning" id="toc-hyperparameter-optimization-model-tuning" class="nav-link" data-scroll-target="#hyperparameter-optimization-model-tuning">06.Hyperparameter Optimization (Model tuning)</a></li>
+  <li><a href="#optimal-model" id="toc-optimal-model" class="nav-link" data-scroll-target="#optimal-model">07. Optimal Model</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">08. Conclusion</a></li>
+  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference">Reference</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+
+
+<section id="introduction-to-support-vector-machinesvm" class="level1">
+<h1>01. Introduction to Support Vector Machine(SVM)</h1>
+<p>A SVM is a supervised machine learning algorithm used for both classification and regression.we will focus on the classification in this section. The objective of SVM algorithms is to detect a hyperplane that distinguishes between classes in an N-dimensional space. Hyperplane dimensions are determined by the number of features. When there are just two input features, the hyperplane is just a line. Hyperplanes become 2-D planes if there are three input features. As the number of features increases, it becomes more difficult to imagine.</p>
+<p>In this section, we will use SVM to classify the input text and determine the tone of each input text. The data set we are going to use consists of 2500 tweets that contain the word that relate to the word “weed”, “cannabins” and “Marijuana” ect.. and tone which represents the sentiments of each tweet.</p>
+<p>We will go through the 7 steps and I will write description for each step. In the end, we will get a SVM model that can help us to classify the sentiments of the input text. Therefore, based on the sentiments we can know if the people like Marijuana or not.</p>
+</section>
+<section id="data-pre-processing" class="level1">
+<h1>02. Data pre-processing</h1>
+<p>It is an essential step in any data mining process. Basically, it involves transforming raw data into a format that can be understood by NLP models. Real-world data is sometimes inaccurate and&nbsp;it is also frequently inconsistent and incomplete. Pre processing data is a good way to solve these issues. This will help in getting better results through the classification algorithms.</p>
+<li>
+Data Cleaning
+</li>
+<p>By removing the blank rows in data and changing all the text to lower case. typecast some data into desired type, unify data format, remove some unrealistic number (e.g.&nbsp;negative number in the age column), remove outliers etc.</p>
+<p>All of above process can be applied on the text/numeric input data and those will help us improve the result of classification.</p>
+<div class="cell" data-execution_count="36">
+<div class="cell-output cell-output-display" data-execution_count="36">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>clean_text</th>
+      <th>tone</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>medical pain taxes spent putting people jail s...</td>
+      <td>-1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>good way clean follower list app called see fo...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>legalize marijuana remove barriers desantis p...</td>
+      <td>-1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>rt chem d ig</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>weed bro thats straight losses miami pats lon...</td>
+      <td>-1</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2495</th>
+      <td>caught someone smoking weed pen class hahahaha...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2496</th>
+      <td>research shows black brown people disproporti...</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2497</th>
+      <td>smoke weed responsible mentally sick sober ser...</td>
+      <td>-1</td>
+    </tr>
+    <tr>
+      <th>2498</th>
+      <td>people call weed cannabis</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2499</th>
+      <td>coughing hit weed ive never seen feel free</td>
+      <td>-1</td>
+    </tr>
+  </tbody>
+</table>
+<p>2500 rows × 2 columns</p>
+</div>
+</div>
+</div>
+<p>The graph above is the input text data. Each line represents a sentence and we have 2500 sentence as input text. Also, we have labelled the tone of each text. -1 represents negatives ;0 represents neutrals ;1 represents positives. Here is the count of each type of tone</p>
+<div class="cell" data-execution_count="37">
+<div class="cell-output cell-output-display" data-execution_count="37">
+<pre><code> 1    1056
+ 0     746
+-1     698
+Name: tone, dtype: int64</code></pre>
+</div>
+</div>
+<li>
+Word Tokenization
+</li>
+<p>This is a process of breaking a text into words, phrases, symbols, or other meaningful elements called tokens. The list of tokens as input can be “read” by the machine. We will use the NLTK Library which has word_tokenize to easily break the input text into word list.</p>
+<li>
+Word Stemming/Lemmatization
+</li>
+<p>Stemming is a process that stems or removes last few characters from a word, often leading to incorrect meanings and spelling. Lemmatization considers the context and converts the word to its meaningful base form</p>
+<p>For more details and codes, click the ‘Data Cleaning’ tab.</p>
+<div class="cell" data-execution_count="38">
+<div class="cell-output cell-output-display" data-execution_count="38">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>clean_text</th>
+      <th>tone</th>
+      <th>word_tokenize</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>medical pain taxes spent putting people jail s...</td>
+      <td>-1</td>
+      <td>[medical, pain, taxes, spent, putting, people,...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>good way clean follower list app called see fo...</td>
+      <td>1</td>
+      <td>[good, way, clean, follower, list, app, called...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>legalize marijuana remove barriers desantis p...</td>
+      <td>-1</td>
+      <td>[legalize, marijuana, remove, barriers, desant...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>rt chem d ig</td>
+      <td>0</td>
+      <td>[rt, chem, d, ig]</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>weed bro thats straight losses miami pats lon...</td>
+      <td>-1</td>
+      <td>[weed, bro, thats, straight, losses, miami, pa...</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2495</th>
+      <td>caught someone smoking weed pen class hahahaha...</td>
+      <td>1</td>
+      <td>[caught, someone, smoking, weed, pen, class, h...</td>
+    </tr>
+    <tr>
+      <th>2496</th>
+      <td>research shows black brown people disproporti...</td>
+      <td>0</td>
+      <td>[research, shows, black, brown, people, dispro...</td>
+    </tr>
+    <tr>
+      <th>2497</th>
+      <td>smoke weed responsible mentally sick sober ser...</td>
+      <td>-1</td>
+      <td>[smoke, weed, responsible, mentally, sick, sob...</td>
+    </tr>
+    <tr>
+      <th>2498</th>
+      <td>people call weed cannabis</td>
+      <td>0</td>
+      <td>[people, call, weed, cannabis]</td>
+    </tr>
+    <tr>
+      <th>2499</th>
+      <td>coughing hit weed ive never seen feel free</td>
+      <td>-1</td>
+      <td>[coughing, hit, weed, ive, never, seen, feel, ...</td>
+    </tr>
+  </tbody>
+</table>
+<p>2500 rows × 3 columns</p>
+</div>
+</div>
+</div>
+<p>the table above, we added a column called word_tokenize and put the tokenized text in the column.</p>
+<div class="cell" data-execution_count="39">
+<div class="cell-output cell-output-display" data-execution_count="39">
+<pre><code>['medical',
+ 'pain',
+ 'tax',
+ 'spent',
+ 'putting',
+ 'people',
+ 'jail',
+ 'sin',
+ 'big',
+ 'pharma',
+ 'fear',
+ 'legal',
+ 'marijuana',
+ 'amp',
+ 'terrorism',
+ 'victim',
+ 'blocked',
+ 'u',
+ 'gover',
+ 'via']</code></pre>
+</div>
+</div>
+<p>The word list above is the first input text after lemmatization. I will apply the lemmatization to all the input text later.</p>
+<li>
+Text Vectorization
+</li>
+<p>Text Vectorization is the process of converting text into numerical representation. Here we are going to use Count Vectorizer from NLTK library to vectorize the text. It is used to transform a given text into a vector on the basis of the frequency (count) of each word that occurs in the entire text.</p>
+<div class="cell" data-execution_count="40">
+<div class="cell-output cell-output-stdout">
+<pre><code>['aahn' 'aaron' 'ab' 'abc' 'ability' 'able' 'abolished' 'abolitionism'
+ 'abortion' 'abortions' 'abroad' 'absolute' 'absolutely' 'abt' 'abundance'
+ 'abuse' 'abusers' 'accept' 'acceptable' 'accepted' 'accepts' 'access'
+ 'accessory' 'accident' 'accomplished' 'according' 'account' 'accountant'
+ 'accounts' 'accretive' 'accumulate' 'accurately' 'accustomed' 'ace'
+ 'achieved' 'achievement' 'achievements' 'acid' 'acquiring' 'acquisition'
+ 'acre' 'acres' 'acro' 'act' 'acted' 'acting' 'action' 'actions' 'active'
+ 'activist']
+[[0 0 0 ... 0 0 0]
+ [0 0 0 ... 0 0 0]
+ [0 0 0 ... 0 0 0]
+ ...
+ [0 0 0 ... 0 0 0]
+ [0 0 0 ... 0 0 0]
+ [0 0 0 ... 0 0 0]]
+the shape of the matrix is  (2500, 6345)</code></pre>
+</div>
+</div>
+<li>
+Feature Selection
+</li>
+<p>we will use text feature selection from TextFeatureSelection library to help us choosing correct feature as input. It will reduce the dimensions of out input data so data complexity is reduced as well, so we can get better result.</p>
+<div class="cell" data-execution_count="41">
+<div class="cell-output cell-output-display" data-execution_count="41">
+<pre><code>(2500, 5100)</code></pre>
+</div>
+</div>
+<p>the size of our data becomes 2500 x 5100 and removes around 20% features (columns)</p>
+<li>
+Split Data
+</li>
+<p>We split the dataset into two parts. One part is used for train the model and another part is used for testing the model performance.</p>
+<p>We are performing a train test split on our dataset. We are providing the test size as 0.20, that means our training sample contains 2000 training set and test sample contains 500 test set.</p>
+<p>The word list represent all words from input text (only show first 20 words) and the matrix below is the count of word for each input text.</p>
+<div class="cell" data-execution_count="42">
+<div class="cell-output cell-output-stdout">
+<pre><code>X_train.shape (2000, 5100)
+y_train.shape (2000,)
+X_test.shape (500, 5100)
+y_test.shape (500,)</code></pre>
+</div>
+</div>
+</section>
+<section id="distribution-of-class-labels" class="level1">
+<h1>03. Distribution of Class labels</h1>
+<p>Plotting the distribution of the class labels will help use to determine which kernel that we can use for the SVM model also what effect it might have on the classification algorithm results.</p>
+<div class="cell" data-execution_count="43">
+<div class="cell-output cell-output-display" data-execution_count="43">
+<pre><code>Text(0, 0.5, 'count')</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="SVM_files/figure-html/cell-10-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<p>It seems like the number of label “-1” and label “0” are less than label “1” and label “1” has the most large sample size. So, I think the result of label “1” will have highest accuracy due to the large sample size. And label “-1” and label “0” will have similar accuracy since they have similar sample size.</p>
+</section>
+<section id="baseline-model-for-comparison" class="level1">
+<h1>04. Baseline model for comparison</h1>
+<p>In this part. We will define a classification method called “random classifier” that randomly chooses the label between the classes and we will use the random selection as our predicted labels. So, the random classifier will give us the worse case for the given classification problem and we can use the result from the random classifier to compare the result from SVM model we are going to use later.</p>
+<p>Since we just do the random selection so how well the random classifier does depends on the number of classes, and the load balance between classes.</p>
+<div class="cell" data-execution_count="44">
+<div class="cell-output cell-output-stdout">
+<pre><code>-----RANDOM CLASSIFIER-----
+count of prediction: dict_values([1032, 752, 716])
+probability of prediction: [0.4128 0.3008 0.2864]
+accuracy 0.3372
+percision, recall, fscore, (array([0.27094972, 0.30053191, 0.40988372]), array([0.27793696, 0.30294906, 0.40056818]), array([0.27439887, 0.30173565, 0.40517241]), array([ 698,  746, 1056]))</code></pre>
+</div>
+</div>
+<p>Therefore, we can use the information above to compare the SVM model to see if the SVM will improve any.</p>
+</section>
+<section id="data-modelling-svm-classification" class="level1">
+<h1>05. Data Modelling (SVM Classification)</h1>
+<p>Now we can use our training set to train the model and use test set to see the performance.</p>
+<div class="cell" data-execution_count="102">
+<div class="cell-output cell-output-display" data-execution_count="102">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>precision</th>
+      <th>recall</th>
+      <th>f1-score</th>
+      <th>support</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>-1</th>
+      <td>1.000000</td>
+      <td>0.996546</td>
+      <td>0.998270</td>
+      <td>579.000</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>0.994941</td>
+      <td>1.000000</td>
+      <td>0.997464</td>
+      <td>590.000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.998795</td>
+      <td>0.997593</td>
+      <td>0.998194</td>
+      <td>831.000</td>
+    </tr>
+    <tr>
+      <th>accuracy</th>
+      <td>0.998000</td>
+      <td>0.998000</td>
+      <td>0.998000</td>
+      <td>0.998</td>
+    </tr>
+    <tr>
+      <th>macro avg</th>
+      <td>0.997912</td>
+      <td>0.998046</td>
+      <td>0.997976</td>
+      <td>2000.000</td>
+    </tr>
+    <tr>
+      <th>weighted avg</th>
+      <td>0.998007</td>
+      <td>0.998000</td>
+      <td>0.998001</td>
+      <td>2000.000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<p>The table above is classification report for the train data</p>
+<div class="cell" data-execution_count="103">
+<div class="cell-output cell-output-display" data-execution_count="103">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>precision</th>
+      <th>recall</th>
+      <th>f1-score</th>
+      <th>support</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>-1</th>
+      <td>0.728155</td>
+      <td>0.630252</td>
+      <td>0.675676</td>
+      <td>119.000</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>0.677725</td>
+      <td>0.916667</td>
+      <td>0.779292</td>
+      <td>156.000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.887097</td>
+      <td>0.733333</td>
+      <td>0.802920</td>
+      <td>225.000</td>
+    </tr>
+    <tr>
+      <th>accuracy</th>
+      <td>0.766000</td>
+      <td>0.766000</td>
+      <td>0.766000</td>
+      <td>0.766</td>
+    </tr>
+    <tr>
+      <th>macro avg</th>
+      <td>0.764326</td>
+      <td>0.760084</td>
+      <td>0.752629</td>
+      <td>500.000</td>
+    </tr>
+    <tr>
+      <th>weighted avg</th>
+      <td>0.783945</td>
+      <td>0.766000</td>
+      <td>0.765264</td>
+      <td>500.000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<p>The table above is classification report for the test data</p>
+<div class="cell" data-execution_count="104">
+<div class="cell-output cell-output-display" data-execution_count="104">
+<pre><code>Text(0.5, 1.0, 'confusion matrix for test data')</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="SVM_files/figure-html/cell-16-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<p>As we can see, the precision is very high for the both train data and test data. Also, we can calculate the accuracy of our model from confusion matrix which is <span class="math inline">\(\dfrac{75+143+165}{500} =0.766\)</span>. The accuracy is so mush higher than the one we got from random classifier. So, the SVM model can actually predicts the sentiments for input text.</p>
+</section>
+<section id="hyperparameter-optimization-model-tuning" class="level1">
+<h1>06.Hyperparameter Optimization (Model tuning)</h1>
+<p>In training, hyperparameters are variables that control the process. During a Model training job, these configuration variables do not change. You can maximize its predictive accuracy by selecting optimized values for hyperparameter.</p>
+<p>In this part, we will choose different values for the hyperparameters (C in SVM model)) and run the model with the chosen C then save its accuracy. Finally, plot the accuracy vs hyperparameter’s value to find out the optimal model.</p>
+<div class="cell" data-execution_count="63">
+<div class="cell-output cell-output-display">
+<p><img src="SVM_files/figure-html/cell-18-output-1.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="SVM_files/figure-html/cell-18-output-2.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="SVM_files/figure-html/cell-18-output-3.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="SVM_files/figure-html/cell-18-output-4.png" class="img-fluid"></p>
+</div>
+</div>
+<p>So based on the 4 graphs, I will choose C value from 0.35 to 0.5 as the best the model.</p>
+</section>
+<section id="optimal-model" class="level1">
+<h1>07. Optimal Model</h1>
+<p>I choose C = 0.8 for SVM model and let’s the model result.</p>
+<div class="cell" data-execution_count="88">
+<div class="cell-output cell-output-stdout">
+<pre><code>------TRAINING------
+              precision    recall  f1-score   support
+-1             0.996516  0.987910  0.992194   579.000
+0              0.981667  0.998305  0.989916   590.000
+1              0.996368  0.990373  0.993361   831.000
+accuracy       0.992000  0.992000  0.992000     0.992
+macro avg      0.991517  0.992196  0.991824  2000.000
+weighted avg   0.992074  0.992000  0.992007  2000.000</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="88">
+<pre><code>Text(0.5, 1.0, 'confusion matrix for train data')</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="SVM_files/figure-html/cell-19-output-3.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="89">
+<div class="cell-output cell-output-stdout">
+<pre><code>------TEST------
+              precision    recall  f1-score  support
+-1             0.765306  0.630252  0.691244   119.00
+0              0.677570  0.929487  0.783784   156.00
+1              0.904255  0.755556  0.823245   225.00
+accuracy       0.780000  0.780000  0.780000     0.78
+macro avg      0.782377  0.771765  0.766091   500.00
+weighted avg   0.800460  0.780000  0.779517   500.00</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="89">
+<pre><code>Text(0.5, 1.0, 'confusion matrix for test data')</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="SVM_files/figure-html/cell-20-output-3.png" class="img-fluid"></p>
+</div>
+</div>
+<p>We can calculate the accuracy from confusion matrix of test data is <span class="math inline">\(\frac{75+145+170}{500} = 0.78\)</span>. Comparing to the old one which is 0.766, we improve the accuracy by around 0.2. Besides, recall and f1-score increased as well.</p>
+</section>
+<section id="conclusion" class="level1">
+<h1>08. Conclusion</h1>
+<p>From the last confusion matrix, we can see the true positive rate (recall) which represents the probability of predicting the tone is X (X can be one of “negative”,“positive”,“neural”) given the tone of input text is X. So, we can get 3 true positive rate for each tone and they are P(X=1|X=1) = <span class="math inline">\(0.756\)</span>, P(X=0|X=0) = <span class="math inline">\(0.929\)</span>, P(X=-1|X=-1) = <span class="math inline">\(0.63\)</span>. These numbers show that model will be more accurate in predicting the tone of neutral compared to the other two.</p>
+<p>Also, the precision represents the quality of a positive prediction made by the model and we got 0.76 for “negative”, 0.677 for “neutral” and “0.904 for”positive”. So, prediction made by the model will have more correct labels in “positive”.</p>
+</section>
+<section id="reference" class="level1">
+<h1>Reference</h1>
+<p>Code: https://github.com/anly501/anly-501-project-yanyanli0/tree/main/codes in 05-SVM file</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
