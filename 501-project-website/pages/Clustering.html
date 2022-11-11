@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.242">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>clustering</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="Clustering_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Clustering_files/libs/quarto-html/quarto.js"></script>
+<script src="Clustering_files/libs/quarto-html/popper.min.js"></script>
+<script src="Clustering_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Clustering_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Clustering_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Clustering_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Clustering_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Clustering_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Clustering_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contents</h2>
+   
+  <ul>
+  <li><a href="#introduction-to-un-supervised-learning-clustering" id="toc-introduction-to-un-supervised-learning-clustering" class="nav-link active" data-scroll-target="#introduction-to-un-supervised-learning-clustering">Introduction to Un-supervised learning – Clustering</a>
+  <ul class="collapse">
+  <li><a href="#data-selection" id="toc-data-selection" class="nav-link" data-scroll-target="#data-selection">Data Selection</a></li>
+  </ul></li>
+  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation">Data Preparation</a></li>
+  <li><a href="#k-means-clustering" id="toc-k-means-clustering" class="nav-link" data-scroll-target="#k-means-clustering">K Means Clustering</a>
+  <ul class="collapse">
+  <li><a href="#optimal-k-means" id="toc-optimal-k-means" class="nav-link" data-scroll-target="#optimal-k-means">Optimal K means</a></li>
+  </ul></li>
+  <li><a href="#dbsan-clustering" id="toc-dbsan-clustering" class="nav-link" data-scroll-target="#dbsan-clustering">DBSAN Clustering</a>
+  <ul class="collapse">
+  <li><a href="#optimal-epsilon" id="toc-optimal-epsilon" class="nav-link" data-scroll-target="#optimal-epsilon">Optimal Epsilon</a></li>
+  </ul></li>
+  <li><a href="#agglomerative-clustering-hierarchical-clustering" id="toc-agglomerative-clustering-hierarchical-clustering" class="nav-link" data-scroll-target="#agglomerative-clustering-hierarchical-clustering">Agglomerative Clustering (Hierarchical clustering)</a>
+  <ul class="collapse">
+  <li><a href="#dendrogram" id="toc-dendrogram" class="nav-link" data-scroll-target="#dendrogram">Dendrogram</a></li>
+  </ul></li>
+  <li><a href="#result" id="toc-result" class="nav-link" data-scroll-target="#result">Result</a>
+  <ul class="collapse">
+  <li><a href="#agglomerative-clustering-in-2d" id="toc-agglomerative-clustering-in-2d" class="nav-link" data-scroll-target="#agglomerative-clustering-in-2d">Agglomerative Clustering in 2D</a></li>
+  <li><a href="#dbscan-clustering-in-2d" id="toc-dbscan-clustering-in-2d" class="nav-link" data-scroll-target="#dbscan-clustering-in-2d">DBSCAN Clustering in 2D</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference">Reference</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+
+
+<section id="introduction-to-un-supervised-learning-clustering" class="level1">
+<h1>Introduction to Un-supervised learning – Clustering</h1>
+<p>Unsupervised learning, also known as unsupervised machine learning, uses machine learning algorithms to analyze and cluster unlabeled datasets. These algorithms discover hidden patterns or data groupings without the need for human intervention(IBM). It is the good&nbsp;option for exploratory data analysis, cross-selling tactics, consumer segmentation, and picture identification because of its capacity to find similarities and differences in information.</p>
+<p>In this section, we will focus on 3 different clustering methods to do the clustering analysis. The data set can be found on My Github called <a href="https://github.com/anly501/anly-501-project-yanyanli0/tree/main/data/01-modified-data">Drug_Consumption.csv</a> and can be download <a href="https://archive.ics.uci.edu/ml/datasets/Drug+consumption+%28quantified%29#">here</a>. The dataset has 1884 rows and 32 columns and each row represents the information about a participant. We will use the 6 columns (‘Age’,‘Gender’,‘Nscore’,‘Escore’,‘Cannabis’,‘Country’) and 1884 rows for the clustering analysis.</p>
+<p><strong>Attribute Information</strong> <br> <strong>Age</strong> is age of a participant has one value from the list {‘55-64’, ‘18-24’, ‘45-54’, ‘25-34’, ‘65+’, ‘35-44’} <br> <strong>Gender</strong> is gender of participant: Female or Male <br> <strong>Country</strong> is country of current residence of participant has one value from the list {‘USA’, ‘Republic of Ireland’, ‘New Zealand’, ‘UK’, ‘Canada’, ‘Other’, ‘Australia’} <br> <strong>Nscore</strong> is NEO-FFI-R Neuroticism and is a numerical value. People who score high in neuroticism are very emotionally reactive. <br> <strong>Escore</strong> is NEO-FFI-R Extraversion and is a numerical value. Extraversion indicates how outgoing and social a person is. <br> <strong>Cannabis</strong> is class of cannabis consumption. It is output attribute with following distribution of classes. {‘CL0’, ‘CL1’, ‘CL2’, ‘CL3’, ‘CL4’, ‘CL5’, ‘CL6’} where <br> CL0 represents Never Used; <br> CL1 represents Used over a Decade Ago; <br> CL2 represents Used in Last Decade; <br> CL3 represents Used in Last Year; <br> CL4 represents Used in Last Month; <br> CL5 represents Used in Last Week; <br> CL6 represents Used in Last Day;</p>
+<p>So, based on these select features, we will use all the columns except the ‘Cannabis’ to divide the data into different groups. Then compare the group labels we get from unsupervised machine learning with the ‘Cannabis’ group labels and check if the clustering predictions coincided with the ‘Cannabis’ group labels.</p>
+<section id="data-selection" class="level2">
+<h2 class="anchored" data-anchor-id="data-selection">Data Selection</h2>
+<p>Choose the target columns which are ‘Age’, ‘Gender’, ‘Nscore’, ‘Escore’,‘Cannabis’,‘Country’</p>
+<div class="cell" data-execution_count="2">
+<div class="cell-output cell-output-display" data-execution_count="2">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>ID</th>
+      <th>Age</th>
+      <th>Gender</th>
+      <th>Education</th>
+      <th>Country</th>
+      <th>Ethnicity</th>
+      <th>Nscore</th>
+      <th>Escore</th>
+      <th>Oscore</th>
+      <th>AScore</th>
+      <th>...</th>
+      <th>Ecstasy</th>
+      <th>Heroin</th>
+      <th>Ketamine</th>
+      <th>Legalh</th>
+      <th>LSD</th>
+      <th>Meth</th>
+      <th>Mushrooms</th>
+      <th>Nicotine</th>
+      <th>Semer</th>
+      <th>VSA</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2</td>
+      <td>25-34</td>
+      <td>M</td>
+      <td>Doctorate degree</td>
+      <td>UK</td>
+      <td>White</td>
+      <td>-0.67825</td>
+      <td>1.93886</td>
+      <td>1.43533</td>
+      <td>0.76096</td>
+      <td>...</td>
+      <td>CL4</td>
+      <td>CL0</td>
+      <td>CL2</td>
+      <td>CL0</td>
+      <td>CL2</td>
+      <td>CL3</td>
+      <td>CL0</td>
+      <td>CL4</td>
+      <td>CL0</td>
+      <td>CL0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>3</td>
+      <td>35-44</td>
+      <td>M</td>
+      <td>Professional certificate/ diploma</td>
+      <td>UK</td>
+      <td>White</td>
+      <td>-0.46725</td>
+      <td>0.80523</td>
+      <td>-0.84732</td>
+      <td>-1.62090</td>
+      <td>...</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL1</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4</td>
+      <td>18-24</td>
+      <td>F</td>
+      <td>Masters degree</td>
+      <td>UK</td>
+      <td>White</td>
+      <td>-0.14882</td>
+      <td>-0.80615</td>
+      <td>-0.01928</td>
+      <td>0.59042</td>
+      <td>...</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL2</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL2</td>
+      <td>CL0</td>
+      <td>CL0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>5</td>
+      <td>35-44</td>
+      <td>F</td>
+      <td>Doctorate degree</td>
+      <td>UK</td>
+      <td>White</td>
+      <td>0.73545</td>
+      <td>-1.63340</td>
+      <td>-0.45174</td>
+      <td>-0.30172</td>
+      <td>...</td>
+      <td>CL1</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL1</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL2</td>
+      <td>CL2</td>
+      <td>CL0</td>
+      <td>CL0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>6</td>
+      <td>65+</td>
+      <td>F</td>
+      <td>Left school at 18 years</td>
+      <td>Canada</td>
+      <td>White</td>
+      <td>-0.67825</td>
+      <td>-0.30033</td>
+      <td>-1.55521</td>
+      <td>2.03972</td>
+      <td>...</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL6</td>
+      <td>CL0</td>
+      <td>CL0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1879</th>
+      <td>1884</td>
+      <td>18-24</td>
+      <td>F</td>
+      <td>Some college or university, no certificate or ...</td>
+      <td>USA</td>
+      <td>White</td>
+      <td>-1.19430</td>
+      <td>1.74091</td>
+      <td>1.88511</td>
+      <td>0.76096</td>
+      <td>...</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL3</td>
+      <td>CL3</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL5</td>
+    </tr>
+    <tr>
+      <th>1880</th>
+      <td>1885</td>
+      <td>18-24</td>
+      <td>M</td>
+      <td>Some college or university, no certificate or ...</td>
+      <td>USA</td>
+      <td>White</td>
+      <td>-0.24649</td>
+      <td>1.74091</td>
+      <td>0.58331</td>
+      <td>0.76096</td>
+      <td>...</td>
+      <td>CL2</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL3</td>
+      <td>CL5</td>
+      <td>CL4</td>
+      <td>CL4</td>
+      <td>CL5</td>
+      <td>CL0</td>
+      <td>CL0</td>
+    </tr>
+    <tr>
+      <th>1881</th>
+      <td>1886</td>
+      <td>25-34</td>
+      <td>F</td>
+      <td>University degree</td>
+      <td>USA</td>
+      <td>White</td>
+      <td>1.13281</td>
+      <td>-1.37639</td>
+      <td>-1.27553</td>
+      <td>-1.77200</td>
+      <td>...</td>
+      <td>CL4</td>
+      <td>CL0</td>
+      <td>CL2</td>
+      <td>CL0</td>
+      <td>CL2</td>
+      <td>CL0</td>
+      <td>CL2</td>
+      <td>CL6</td>
+      <td>CL0</td>
+      <td>CL0</td>
+    </tr>
+    <tr>
+      <th>1882</th>
+      <td>1887</td>
+      <td>18-24</td>
+      <td>F</td>
+      <td>Some college or university, no certificate or ...</td>
+      <td>USA</td>
+      <td>White</td>
+      <td>0.91093</td>
+      <td>-1.92173</td>
+      <td>0.29338</td>
+      <td>-1.62090</td>
+      <td>...</td>
+      <td>CL3</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL3</td>
+      <td>CL3</td>
+      <td>CL0</td>
+      <td>CL3</td>
+      <td>CL4</td>
+      <td>CL0</td>
+      <td>CL0</td>
+    </tr>
+    <tr>
+      <th>1883</th>
+      <td>1888</td>
+      <td>18-24</td>
+      <td>M</td>
+      <td>Some college or university, no certificate or ...</td>
+      <td>Republic of Ireland</td>
+      <td>White</td>
+      <td>-0.46725</td>
+      <td>2.12700</td>
+      <td>1.65653</td>
+      <td>1.11406</td>
+      <td>...</td>
+      <td>CL3</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL3</td>
+      <td>CL3</td>
+      <td>CL0</td>
+      <td>CL3</td>
+      <td>CL6</td>
+      <td>CL0</td>
+      <td>CL2</td>
+    </tr>
+  </tbody>
+</table>
+<p>1884 rows × 32 columns</p>
+</div>
+</div>
+</div>
+<p>Entire dataset (1884 rows × 32 columns)</p>
+<div class="cell" data-execution_count="3">
+<div class="cell-output cell-output-display" data-execution_count="3">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Age</th>
+      <th>Gender</th>
+      <th>Nscore</th>
+      <th>Escore</th>
+      <th>Cannabis</th>
+      <th>Country</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>25-34</td>
+      <td>M</td>
+      <td>-0.67825</td>
+      <td>1.93886</td>
+      <td>CL4</td>
+      <td>UK</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>35-44</td>
+      <td>M</td>
+      <td>-0.46725</td>
+      <td>0.80523</td>
+      <td>CL3</td>
+      <td>UK</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>18-24</td>
+      <td>F</td>
+      <td>-0.14882</td>
+      <td>-0.80615</td>
+      <td>CL2</td>
+      <td>UK</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>35-44</td>
+      <td>F</td>
+      <td>0.73545</td>
+      <td>-1.63340</td>
+      <td>CL3</td>
+      <td>UK</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>65+</td>
+      <td>F</td>
+      <td>-0.67825</td>
+      <td>-0.30033</td>
+      <td>CL0</td>
+      <td>Canada</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1879</th>
+      <td>18-24</td>
+      <td>F</td>
+      <td>-1.19430</td>
+      <td>1.74091</td>
+      <td>CL5</td>
+      <td>USA</td>
+    </tr>
+    <tr>
+      <th>1880</th>
+      <td>18-24</td>
+      <td>M</td>
+      <td>-0.24649</td>
+      <td>1.74091</td>
+      <td>CL3</td>
+      <td>USA</td>
+    </tr>
+    <tr>
+      <th>1881</th>
+      <td>25-34</td>
+      <td>F</td>
+      <td>1.13281</td>
+      <td>-1.37639</td>
+      <td>CL6</td>
+      <td>USA</td>
+    </tr>
+    <tr>
+      <th>1882</th>
+      <td>18-24</td>
+      <td>F</td>
+      <td>0.91093</td>
+      <td>-1.92173</td>
+      <td>CL6</td>
+      <td>USA</td>
+    </tr>
+    <tr>
+      <th>1883</th>
+      <td>18-24</td>
+      <td>M</td>
+      <td>-0.46725</td>
+      <td>2.12700</td>
+      <td>CL3</td>
+      <td>Republic of Ireland</td>
+    </tr>
+  </tbody>
+</table>
+<p>1884 rows × 6 columns</p>
+</div>
+</div>
+</div>
+<p>Selected dataset (1884 rows × 6 columns)</p>
+</section>
+</section>
+<section id="data-preparation" class="level1">
+<h1>Data Preparation</h1>
+<li>
+Replace the values in Column ‘Age’ with it median
+</li>
+<p><br> For example, the first row has ‘25-34’ in Age column and it will be replaced with 29.5</p>
+<div class="cell" data-execution_count="5">
+<div class="cell-output cell-output-display" data-execution_count="5">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Age</th>
+      <th>Gender</th>
+      <th>Nscore</th>
+      <th>Escore</th>
+      <th>Cannabis</th>
+      <th>Country</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>29.5</td>
+      <td>M</td>
+      <td>-0.67825</td>
+      <td>1.93886</td>
+      <td>CL4</td>
+      <td>UK</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>39.5</td>
+      <td>M</td>
+      <td>-0.46725</td>
+      <td>0.80523</td>
+      <td>CL3</td>
+      <td>UK</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>21.0</td>
+      <td>F</td>
+      <td>-0.14882</td>
+      <td>-0.80615</td>
+      <td>CL2</td>
+      <td>UK</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>39.5</td>
+      <td>F</td>
+      <td>0.73545</td>
+      <td>-1.63340</td>
+      <td>CL3</td>
+      <td>UK</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>65.0</td>
+      <td>F</td>
+      <td>-0.67825</td>
+      <td>-0.30033</td>
+      <td>CL0</td>
+      <td>Canada</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<li>
+Replace the categorical values in Cannabis with category codes
+</li>
+<div class="cell" data-execution_count="6">
+<div class="cell-output cell-output-stdout">
+<pre><code>{0: 'CL0', 1: 'CL1', 2: 'CL2', 3: 'CL3', 4: 'CL4', 5: 'CL5', 6: 'CL6'}</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Age</th>
+      <th>Gender</th>
+      <th>Nscore</th>
+      <th>Escore</th>
+      <th>Cannabis</th>
+      <th>Country</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>29.5</td>
+      <td>M</td>
+      <td>-0.67825</td>
+      <td>1.93886</td>
+      <td>4</td>
+      <td>UK</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>39.5</td>
+      <td>M</td>
+      <td>-0.46725</td>
+      <td>0.80523</td>
+      <td>3</td>
+      <td>UK</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>21.0</td>
+      <td>F</td>
+      <td>-0.14882</td>
+      <td>-0.80615</td>
+      <td>2</td>
+      <td>UK</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>39.5</td>
+      <td>F</td>
+      <td>0.73545</td>
+      <td>-1.63340</td>
+      <td>3</td>
+      <td>UK</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>65.0</td>
+      <td>F</td>
+      <td>-0.67825</td>
+      <td>-0.30033</td>
+      <td>0</td>
+      <td>Canada</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<li>
+Replace the categorical values in Gender with 1 indicating male and 0 indicating female
+</li>
+<div class="cell" data-execution_count="7">
+<div class="cell-output cell-output-stdout">
+<pre><code>{0: 'F', 1: 'M'}</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Age</th>
+      <th>Gender</th>
+      <th>Nscore</th>
+      <th>Escore</th>
+      <th>Cannabis</th>
+      <th>Country</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>29.5</td>
+      <td>1</td>
+      <td>-0.67825</td>
+      <td>1.93886</td>
+      <td>4</td>
+      <td>UK</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>39.5</td>
+      <td>1</td>
+      <td>-0.46725</td>
+      <td>0.80523</td>
+      <td>3</td>
+      <td>UK</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>21.0</td>
+      <td>0</td>
+      <td>-0.14882</td>
+      <td>-0.80615</td>
+      <td>2</td>
+      <td>UK</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>39.5</td>
+      <td>0</td>
+      <td>0.73545</td>
+      <td>-1.63340</td>
+      <td>3</td>
+      <td>UK</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>65.0</td>
+      <td>0</td>
+      <td>-0.67825</td>
+      <td>-0.30033</td>
+      <td>0</td>
+      <td>Canada</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<li>
+Replace the categorical values in Country
+</li>
+<div class="cell" data-execution_count="8">
+<div class="cell-output cell-output-stdout">
+<pre><code>{0: 'Australia', 1: 'Canada', 2: 'New Zealand', 3: 'Other', 4: 'Republic of Ireland', 5: 'UK', 6: 'USA'}</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Age</th>
+      <th>Gender</th>
+      <th>Nscore</th>
+      <th>Escore</th>
+      <th>Cannabis</th>
+      <th>Country</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>29.5</td>
+      <td>1</td>
+      <td>-0.67825</td>
+      <td>1.93886</td>
+      <td>4</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>39.5</td>
+      <td>1</td>
+      <td>-0.46725</td>
+      <td>0.80523</td>
+      <td>3</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>21.0</td>
+      <td>0</td>
+      <td>-0.14882</td>
+      <td>-0.80615</td>
+      <td>2</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>39.5</td>
+      <td>0</td>
+      <td>0.73545</td>
+      <td>-1.63340</td>
+      <td>3</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>65.0</td>
+      <td>0</td>
+      <td>-0.67825</td>
+      <td>-0.30033</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<li>
+Normalize the numerical data
+</li>
+<div class="cell" data-execution_count="10">
+<div class="cell-output cell-output-display" data-execution_count="10">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Age</th>
+      <th>Gender</th>
+      <th>Nscore</th>
+      <th>Escore</th>
+      <th>Country</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>-0.323689</td>
+      <td>0.998939</td>
+      <td>-0.679435</td>
+      <td>1.943848</td>
+      <td>0.12445</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.501130</td>
+      <td>0.998939</td>
+      <td>-0.468029</td>
+      <td>0.807218</td>
+      <td>0.12445</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-1.024784</td>
+      <td>-1.001062</td>
+      <td>-0.148987</td>
+      <td>-0.808426</td>
+      <td>0.12445</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.501130</td>
+      <td>-1.001062</td>
+      <td>0.736985</td>
+      <td>-1.637866</td>
+      <td>0.12445</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2.604416</td>
+      <td>-1.001062</td>
+      <td>-0.679435</td>
+      <td>-0.301268</td>
+      <td>-2.70042</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="k-means-clustering" class="level1">
+<h1>K Means Clustering</h1>
+<p>K-means is a centroid-based clustering technique where each data point is assigned to a cluster based on the distance between it and a centroid. Finding the K number of groups in the dataset is the objective.</p>
+<p>Now, we are going to use two methods called Elbow method and Silhouette method to find the ideal number of K.</p>
+<p>Elbow method contains two measurement one is distortions and another one is inertias. Both of them measure how far the data point is from the centroid of assigned the cluster. We are going to plot distortions/inertias vs Number of Clustering, and our goal is to pick the elbow of the curve as the number of clusters to use.</p>
+<p>Silhouette method is to calculate the Silhouette score with different number of cluster. Since, Silhouette score is used to evaluate the quality of clusters created. So, our goal for this method is to find the Number of clusters with highest Silhouette score.</p>
+<div class="cell" data-execution_count="14">
+<div class="cell-output cell-output-stdout">
+<pre><code>OPTIMAL PARAMETER = 8</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Clustering_files/figure-html/cell-15-output-2.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Clustering_files/figure-html/cell-15-output-3.png" class="img-fluid"></p>
+</div>
+</div>
+<p>From the two graphs above, we can see the highest Silhouette score is around 0.257 when the cluster size is 8.</p>
+<section id="optimal-k-means" class="level2">
+<h2 class="anchored" data-anchor-id="optimal-k-means">Optimal K means</h2>
+<div class="cell" data-execution_count="15">
+<div class="cell-output cell-output-display">
+<p><img src="Clustering_files/figure-html/cell-16-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="dbsan-clustering" class="level1">
+<h1>DBSAN Clustering</h1>
+<p>It creates a cluster from “densely organized” data points. By examining the local density of the data points, it may locate clusters in big geographical datasets. The sensitivity to outliers of DBSCAN clustering is its most exciting characteristic. Additionally, unlike K-Means, which requires us to specify the number of centroids, it does not require us to know in advance how many clusters will be present (Sharma). Besides, the DBSAN Clustering only have two parameters epsilon and mini sample size. The epsilon represents the radius of the circle centered at the each data point and mini sample size represents the minimum number of data points required in the circle.</p>
+<p>So, in this section, we will find the best optimal epsilon and mini sample size then apply DBSCAN clustering on the dataset and visualize the result.</p>
+<section id="optimal-epsilon" class="level2">
+<h2 class="anchored" data-anchor-id="optimal-epsilon">Optimal Epsilon</h2>
+<div class="cell" data-execution_count="16">
+<div class="cell-output cell-output-stdout">
+<pre><code>OPTIMAL PARAMETER = 2.0</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Clustering_files/figure-html/cell-17-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="17">
+<div class="cell-output cell-output-display">
+<p><img src="Clustering_files/figure-html/cell-18-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="agglomerative-clustering-hierarchical-clustering" class="level1">
+<h1>Agglomerative Clustering (Hierarchical clustering)</h1>
+<p>Agglomerative Clustering is also called Hierarchical clustering. It is one of the unsupervised machine learning methods that can divide the data into different groups based on the similarity of each data. So, the data in the same cluster have similar feature and data in different cluster are less similar.</p>
+<p>The Agglomerative Clustering method only require one parameter which is number of cluster. We will find the optimal cluster size dendrogram method and visualize the optimal result</p>
+<section id="dendrogram" class="level2">
+<h2 class="anchored" data-anchor-id="dendrogram">Dendrogram</h2>
+<div class="cell" data-execution_count="18">
+<div class="cell-output cell-output-display">
+<p><img src="Clustering_files/figure-html/cell-19-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="19">
+<div class="cell-output cell-output-stdout">
+<pre><code>OPTIMAL PARAMETER = 3</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Clustering_files/figure-html/cell-20-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="20">
+<div class="cell-output cell-output-display">
+<p><img src="Clustering_files/figure-html/cell-21-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="result" class="level1">
+<h1>Result</h1>
+<p>Let’s plot the data based on the and put all four graphs together and compare them with the data labeled by ‘Cannabis’</p>
+<p><img src="kmeans.png" alt="drawing" width="340"></p>
+<p><img src="DBSCAN.png" alt="drawing" width="350"></p>
+<p><img src="Agg.png" alt="drawing" width="355"></p>
+<p><img src="normal.png" alt="drawing" width="340"></p>
+<p>From the four graphs above, we can clearly see that different methods divide the data into different size of clusters. K means has 8 clusters, dbscan only have 2 clusters and the agglomerative has 3 clusters.</p>
+<p>All of the results don’t match the Cannabis labels in the dataset. The K means cluster has the most different cluster sizes.</p>
+<p>Let’s visualize the data points into 2D and see what we can discover</p>
+<div class="cell" data-execution_count="47">
+<div class="cell-output cell-output-display" data-execution_count="47">
+<pre><code>Index(['Age', 'Gender', 'Nscore', 'Escore', 'Cannabis', 'Country',
+       'label_kmean', 'label_db', 'label_agg'],
+      dtype='object')</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="53">
+<div class="cell-output cell-output-display" data-execution_count="53">
+<pre><code>Text(0.5, 1.0, 'Escore vs Country')</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Clustering_files/figure-html/cell-23-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<section id="agglomerative-clustering-in-2d" class="level2">
+<h2 class="anchored" data-anchor-id="agglomerative-clustering-in-2d">Agglomerative Clustering in 2D</h2>
+<div class="cell" data-execution_count="22">
+<div class="cell-output cell-output-display" data-execution_count="22">
+<pre><code>Text(0.5, 1.0, 'Escore vs Country')</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Clustering_files/figure-html/cell-24-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<p>From the graph, we can tell that the almost all the black points are located on Country 0 to 3 and rest the points are coming from Country 3 to 6. And the range of Nscore of black points is around -2.5 to 2 and same for the Escore.</p>
+</section>
+<section id="dbscan-clustering-in-2d" class="level2">
+<h2 class="anchored" data-anchor-id="dbscan-clustering-in-2d">DBSCAN Clustering in 2D</h2>
+<div class="cell" data-execution_count="23">
+<div class="cell-output cell-output-display" data-execution_count="23">
+<pre><code>Text(0.5, 1.0, 'Escore vs Gender')</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Clustering_files/figure-html/cell-25-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<p>From above graphs, we can see the DBSCAN method divide all the data points into two groups based on their gender– Female(0) and Male(1). From the left hand side graph, we can see the more orange group sightly higher than the blue points group. Since the organ group is Gender 0 which represents female, we can tell the average Nscore of female is higher than male’s. Similarly, for the right hand side graph, we can see more orange points are concentrated on -3 to 3 and blue points are concentrated on -3 to 2.5. So, the average female Escore are higher than male’s as well.</p>
+</section>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>Overall, different clustering methods will divide the dataset into different group based on different standard or data similarity. For example, we can clearly see the DBSCAN clustering has perfect two gender clusters and other method dont have more than two groups. So, I think it is useful to apply multiple clustering on the same dataset to find their features in different ways.</p>
+<p>What I found in DBSCAN clustering is the average Nscore/Escore of female is higher than male’s, which shows that female are more emotionally reactive than male. From the Wikipedia, research has suggested that women express emotions more frequently than men on average. Multiple researchers have found that women cry more frequently, and for longer durations than men at similar ages. This view is completely consistent with our results .</p>
+<p>In the end, since these three methods didnt predicts the same labels as Cannabis, I think there are might be other key features that need to be consider.</p>
+</section>
+<section id="reference" class="level1">
+<h1>Reference</h1>
+<p>IBM Cloud Education. (n.d.). What is unsupervised learning? IBM. Retrieved November 6, 2022, from https://www.ibm.com/cloud/learn/unsupervised-learning#:~:text=Unsupervised%20learning%2C%20also%20known%20as,the%20need%20for%20human%20intervention.</p>
+<p>Sharma, A. (2022, June 20). How does DBSCAN clustering work?: DBSCAN clustering for ML. Analytics Vidhya. Retrieved November 10, 2022, from https://www.analyticsvidhya.com/blog/2020/09/how-dbscan-clustering-works/</p>
+<p>Wikimedia Foundation. (2022, August 20). Gender and emotional expression. Wikipedia. Retrieved November 11, 2022, from https://en.wikipedia.org/wiki/Gender_and_emotional_expression</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
