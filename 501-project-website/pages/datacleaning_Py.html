@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.242">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>datacleaning_py</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="datacleaning_Py_files/libs/clipboard/clipboard.min.js"></script>
+<script src="datacleaning_Py_files/libs/quarto-html/quarto.js"></script>
+<script src="datacleaning_Py_files/libs/quarto-html/popper.min.js"></script>
+<script src="datacleaning_Py_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="datacleaning_Py_files/libs/quarto-html/anchor.min.js"></script>
+<link href="datacleaning_Py_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="datacleaning_Py_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="datacleaning_Py_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="datacleaning_Py_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="datacleaning_Py_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contents</h2>
+   
+  <ul>
+  <li><a href="#introduction-to-data-cleaning" id="toc-introduction-to-data-cleaning" class="nav-link active" data-scroll-target="#introduction-to-data-cleaning">Introduction to Data Cleaning</a></li>
+  <li><a href="#pre-review-of-dataset" id="toc-pre-review-of-dataset" class="nav-link" data-scroll-target="#pre-review-of-dataset">Pre review of Dataset</a></li>
+  <li><a href="#data-cleaning" id="toc-data-cleaning" class="nav-link" data-scroll-target="#data-cleaning">Data Cleaning</a>
+  <ul class="collapse">
+  <li><a href="#remove-unrelated-columns" id="toc-remove-unrelated-columns" class="nav-link" data-scroll-target="#remove-unrelated-columns">Remove unrelated columns</a></li>
+  <li><a href="#choose-the-english-user" id="toc-choose-the-english-user" class="nav-link" data-scroll-target="#choose-the-english-user">Choose the English User</a></li>
+  <li><a href="#check-empty-rows-in-dataset" id="toc-check-empty-rows-in-dataset" class="nav-link" data-scroll-target="#check-empty-rows-in-dataset">Check empty rows in dataset</a></li>
+  <li><a href="#remove-the-duplicated-rows-in-dataset" id="toc-remove-the-duplicated-rows-in-dataset" class="nav-link" data-scroll-target="#remove-the-duplicated-rows-in-dataset">Remove the Duplicated rows in dataset</a></li>
+  <li><a href="#count-the-words-before-cleaning-the-text" id="toc-count-the-words-before-cleaning-the-text" class="nav-link" data-scroll-target="#count-the-words-before-cleaning-the-text">Count the words before cleaning the text</a></li>
+  <li><a href="#remove-the-punctuation-dights-symbols-hashtags-etc.-non-word-characters." id="toc-remove-the-punctuation-dights-symbols-hashtags-etc.-non-word-characters." class="nav-link" data-scroll-target="#remove-the-punctuation-dights-symbols-hashtags-etc.-non-word-characters.">Remove the punctuation, dights, symbols, hashtags etc. non-word characters.</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+
+
+<section id="introduction-to-data-cleaning" class="level1">
+<h1>Introduction to Data Cleaning</h1>
+<p>Data cleaning is the process of fixing or removing incorrect, corrupted, incorrectly formatted, duplicate, or incomplete data within a dataset. Data cleaning is an important step in data analysis and data science, as it can help to ensure that results are accurate and reliable. There are many different approaches to data cleaning, and the best approach to use will often depend on the nature and size of the data set. However, some common data cleaning tasks include identifying and correcting errors, dealing with missing data, and identifying and removing duplicate records. data cleaning can be a time-consuming task, but it is essential for ensuring that data sets are fit for purpose.</p>
+<p>In this section, I will use the tweet dataset that I collected from the last section and clean the it</p>
+</section>
+<section id="pre-review-of-dataset" class="level1">
+<h1>Pre review of Dataset</h1>
+<div class="cell" data-execution_count="5">
+<div class="cell-output cell-output-display" data-execution_count="5">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Unnamed: 0</th>
+      <th>User ID</th>
+      <th>Date</th>
+      <th>Language</th>
+      <th>Text</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>1569089016657768448</td>
+      <td>2022-09-11 22:22:28+00:00</td>
+      <td>en</td>
+      <td>All the medical pain and all the taxes spent p...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>1569088754559631365</td>
+      <td>2022-09-11 22:21:26+00:00</td>
+      <td>en</td>
+      <td>A good way to clean up your follower list is t...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>1569086451857358853</td>
+      <td>2022-09-11 22:12:16+00:00</td>
+      <td>en</td>
+      <td>@1zzyzyx1 @MeidasTouch @CharlieCrist legalize ...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>1569086195786985472</td>
+      <td>2022-09-11 22:11:15+00:00</td>
+      <td>en</td>
+      <td>RT @snoopdoggslungz: 📸 Chem D\n🌱(ig) https://t...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>1569085096400982016</td>
+      <td>2022-09-11 22:06:53+00:00</td>
+      <td>en</td>
+      <td>@BabzOnTheMic Off the weed bro. That’s 4 strai...</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2495</th>
+      <td>2495</td>
+      <td>1567623803655835648</td>
+      <td>2022-09-07 21:20:14+00:00</td>
+      <td>en</td>
+      <td>I just caught someone smoking their weed pen i...</td>
+    </tr>
+    <tr>
+      <th>2496</th>
+      <td>2496</td>
+      <td>1567623191455215616</td>
+      <td>2022-09-07 21:17:48+00:00</td>
+      <td>en</td>
+      <td>@AesPolitics And research shows black and brow...</td>
+    </tr>
+    <tr>
+      <th>2497</th>
+      <td>2497</td>
+      <td>1567623151915343874</td>
+      <td>2022-09-07 21:17:39+00:00</td>
+      <td>en</td>
+      <td>Smoke weed “ your not responsible and mentally...</td>
+    </tr>
+    <tr>
+      <th>2498</th>
+      <td>2498</td>
+      <td>1567621220551507977</td>
+      <td>2022-09-07 21:09:58+00:00</td>
+      <td>en</td>
+      <td>People who call weed, cannabis. https://t.co/m...</td>
+    </tr>
+    <tr>
+      <th>2499</th>
+      <td>2499</td>
+      <td>1567621156726784002</td>
+      <td>2022-09-07 21:09:43+00:00</td>
+      <td>en</td>
+      <td>You were coughing when you hit my weed, but I’...</td>
+    </tr>
+  </tbody>
+</table>
+<p>2500 rows × 5 columns</p>
+</div>
+</div>
+</div>
+<p>Above is our 2500 tweets that we collect from through Tweeter API. As we can see the dataset consists of 5 columns which are ‘Unnamed: 0’ ‘User ID Date’ ‘Language’ and ‘Text’. Since, we only focus on the English user, post data and their tweets, I will remove the other unrelated columns.</p>
+</section>
+<section id="data-cleaning" class="level1">
+<h1>Data Cleaning</h1>
+<section id="remove-unrelated-columns" class="level2">
+<h2 class="anchored" data-anchor-id="remove-unrelated-columns">Remove unrelated columns</h2>
+<div class="cell" data-execution_count="9">
+<div class="cell-output cell-output-display" data-execution_count="9">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Date</th>
+      <th>Language</th>
+      <th>Text</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2022-09-11 22:22:28+00:00</td>
+      <td>en</td>
+      <td>All the medical pain and all the taxes spent p...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2022-09-11 22:21:26+00:00</td>
+      <td>en</td>
+      <td>A good way to clean up your follower list is t...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2022-09-11 22:12:16+00:00</td>
+      <td>en</td>
+      <td>@1zzyzyx1 @MeidasTouch @CharlieCrist legalize ...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2022-09-11 22:11:15+00:00</td>
+      <td>en</td>
+      <td>RT @snoopdoggslungz: 📸 Chem D\n🌱(ig) https://t...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2022-09-11 22:06:53+00:00</td>
+      <td>en</td>
+      <td>@BabzOnTheMic Off the weed bro. That’s 4 strai...</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2495</th>
+      <td>2022-09-07 21:20:14+00:00</td>
+      <td>en</td>
+      <td>I just caught someone smoking their weed pen i...</td>
+    </tr>
+    <tr>
+      <th>2496</th>
+      <td>2022-09-07 21:17:48+00:00</td>
+      <td>en</td>
+      <td>@AesPolitics And research shows black and brow...</td>
+    </tr>
+    <tr>
+      <th>2497</th>
+      <td>2022-09-07 21:17:39+00:00</td>
+      <td>en</td>
+      <td>Smoke weed “ your not responsible and mentally...</td>
+    </tr>
+    <tr>
+      <th>2498</th>
+      <td>2022-09-07 21:09:58+00:00</td>
+      <td>en</td>
+      <td>People who call weed, cannabis. https://t.co/m...</td>
+    </tr>
+    <tr>
+      <th>2499</th>
+      <td>2022-09-07 21:09:43+00:00</td>
+      <td>en</td>
+      <td>You were coughing when you hit my weed, but I’...</td>
+    </tr>
+  </tbody>
+</table>
+<p>2500 rows × 3 columns</p>
+</div>
+</div>
+</div>
+<p>Therefore, we got 3 columns after removing unrelated columns</p>
+</section>
+<section id="choose-the-english-user" class="level2">
+<h2 class="anchored" data-anchor-id="choose-the-english-user">Choose the English User</h2>
+<div class="cell" data-execution_count="8">
+<div class="cell-output cell-output-display" data-execution_count="8">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Date</th>
+      <th>Language</th>
+      <th>Text</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2022-09-11 22:22:28+00:00</td>
+      <td>en</td>
+      <td>All the medical pain and all the taxes spent p...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2022-09-11 22:21:26+00:00</td>
+      <td>en</td>
+      <td>A good way to clean up your follower list is t...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2022-09-11 22:12:16+00:00</td>
+      <td>en</td>
+      <td>@1zzyzyx1 @MeidasTouch @CharlieCrist legalize ...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2022-09-11 22:11:15+00:00</td>
+      <td>en</td>
+      <td>RT @snoopdoggslungz: 📸 Chem D\n🌱(ig) https://t...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2022-09-11 22:06:53+00:00</td>
+      <td>en</td>
+      <td>@BabzOnTheMic Off the weed bro. That’s 4 strai...</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2495</th>
+      <td>2022-09-07 21:20:14+00:00</td>
+      <td>en</td>
+      <td>I just caught someone smoking their weed pen i...</td>
+    </tr>
+    <tr>
+      <th>2496</th>
+      <td>2022-09-07 21:17:48+00:00</td>
+      <td>en</td>
+      <td>@AesPolitics And research shows black and brow...</td>
+    </tr>
+    <tr>
+      <th>2497</th>
+      <td>2022-09-07 21:17:39+00:00</td>
+      <td>en</td>
+      <td>Smoke weed “ your not responsible and mentally...</td>
+    </tr>
+    <tr>
+      <th>2498</th>
+      <td>2022-09-07 21:09:58+00:00</td>
+      <td>en</td>
+      <td>People who call weed, cannabis. https://t.co/m...</td>
+    </tr>
+    <tr>
+      <th>2499</th>
+      <td>2022-09-07 21:09:43+00:00</td>
+      <td>en</td>
+      <td>You were coughing when you hit my weed, but I’...</td>
+    </tr>
+  </tbody>
+</table>
+<p>2500 rows × 3 columns</p>
+</div>
+</div>
+</div>
+<p>Since there are still 2500 rows, all of the tweets are posted by English Users.</p>
+</section>
+<section id="check-empty-rows-in-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="check-empty-rows-in-dataset">Check empty rows in dataset</h2>
+<div class="cell" data-execution_count="68">
+<div class="cell-output cell-output-display" data-execution_count="68">
+<pre><code>Date        False
+Language    False
+Text        False
+dtype: bool</code></pre>
+</div>
+</div>
+<p>There is no empty row in the dataset so we are good to go.</p>
+</section>
+<section id="remove-the-duplicated-rows-in-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="remove-the-duplicated-rows-in-dataset">Remove the Duplicated rows in dataset</h2>
+<div class="cell" data-execution_count="10">
+<div class="cell-output cell-output-display" data-execution_count="10">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Date</th>
+      <th>Language</th>
+      <th>Text</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2022-09-11 22:22:28+00:00</td>
+      <td>en</td>
+      <td>All the medical pain and all the taxes spent p...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2022-09-11 22:21:26+00:00</td>
+      <td>en</td>
+      <td>A good way to clean up your follower list is t...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2022-09-11 22:12:16+00:00</td>
+      <td>en</td>
+      <td>@1zzyzyx1 @MeidasTouch @CharlieCrist legalize ...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2022-09-11 22:11:15+00:00</td>
+      <td>en</td>
+      <td>RT @snoopdoggslungz: 📸 Chem D\n🌱(ig) https://t...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2022-09-11 22:06:53+00:00</td>
+      <td>en</td>
+      <td>@BabzOnTheMic Off the weed bro. That’s 4 strai...</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2495</th>
+      <td>2022-09-07 21:20:14+00:00</td>
+      <td>en</td>
+      <td>I just caught someone smoking their weed pen i...</td>
+    </tr>
+    <tr>
+      <th>2496</th>
+      <td>2022-09-07 21:17:48+00:00</td>
+      <td>en</td>
+      <td>@AesPolitics And research shows black and brow...</td>
+    </tr>
+    <tr>
+      <th>2497</th>
+      <td>2022-09-07 21:17:39+00:00</td>
+      <td>en</td>
+      <td>Smoke weed “ your not responsible and mentally...</td>
+    </tr>
+    <tr>
+      <th>2498</th>
+      <td>2022-09-07 21:09:58+00:00</td>
+      <td>en</td>
+      <td>People who call weed, cannabis. https://t.co/m...</td>
+    </tr>
+    <tr>
+      <th>2499</th>
+      <td>2022-09-07 21:09:43+00:00</td>
+      <td>en</td>
+      <td>You were coughing when you hit my weed, but I’...</td>
+    </tr>
+  </tbody>
+</table>
+<p>2500 rows × 3 columns</p>
+</div>
+</div>
+</div>
+<p>There is no duplicated row in the dataset</p>
+<div class="cell" data-execution_count="69">
+<div class="cell-output cell-output-display" data-execution_count="69">
+<pre><code>0     All the medical pain and all the taxes spent p...
+1     A good way to clean up your follower list is t...
+2     @1zzyzyx1 @MeidasTouch @CharlieCrist legalize ...
+3     RT @snoopdoggslungz: 📸 Chem D\n🌱(ig) https://t...
+4     @BabzOnTheMic Off the weed bro. That’s 4 strai...
+5     @IEngageApp My dog + Pain meds, prilocaine (nu...
+6                    I need weed but I can’t get uppppp
+7                             this weed hit different 💚
+8     RT @snoopdoggslungz: 📸 Chem D\n🌱(ig) https://t...
+9     I’m not used to a nigga not having hella weed ...
+10    RT @CAL_FIRE: #MillFire off Woodridge Court an...
+11    @Ac7ionMann Depends....is that weed behind you...
+12    @amberdawn4444 @SpaceXplorer11 Interesting tha...
+13    #MSOGang 0Cannabis retail: Shrinkage ahead » s...
+14    @kathbarbadoro I just finished lunch and smoke...
+15    @Tumble____weed @Emrys_Angel i cant lol but i ...
+16    that first hit of weed after the gym sends me ...
+17    Yes no criminalization for using weed https://...
+18    I would be getting sober at the exact time som...
+19    Celebrated Athletes, Musicians and Cannabis Al...
+Name: Text, dtype: object</code></pre>
+</div>
+</div>
+</section>
+<section id="count-the-words-before-cleaning-the-text" class="level2">
+<h2 class="anchored" data-anchor-id="count-the-words-before-cleaning-the-text">Count the words before cleaning the text</h2>
+<p>Let’s count each word amount 2500 tweets</p>
+<div class="cell" data-execution_count="71">
+<div class="cell-output cell-output-display" data-execution_count="71">
+<pre><code>&lt;BarContainer object of 20 artists&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="datacleaning_Py_files/figure-html/cell-11-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<p>Above picture is the distribution of first 20 words.</p>
+<div class="cell" data-execution_count="72">
+<div class="cell-output cell-output-stdout">
+<pre><code>['00', '000', '0001', '002wsiszo2', '00ensfupua', '00usd', '01yhjge9yb', '03kxndbiws', '0600', '08', '08krz2qf6r', '08krz2qmvz', '08wwsbpzqm', '09', '0ahww5s89w', '0cannabis', '0cy4xp2tyo', '0sk5yurcld', '0tkok78k6o', '0whlv4ae2k', '0wtobhtc20', '0wvvwn3exm', '0xactivx', '0xuu0wcofc', '10', '100', '1000', '100000000', '10009', '100pcs', '100zillion', '101', '1011', '107sfkttno', '10am', '10ft', '10k', '10kusd', '10million', '10th', '10x', '11', '113', '113b', '118', '11am', '11krkts', '11pm', '11th', '12', '120', '122', '122usd', '12th', '12vvrqk7rk', '13', '130', '14', '140l8ioigx', '143vinyldotcom', '15', '150m', '15eepzquvn', '15mg', '16', '161', '165', '167', '17', '1744195', '18', '180', '18306', '1835974', '1844', '185668232', '1887', '18g', '19', '190', '1933', '1960s', '1970s', '1974', '1980', '1987', '1990s', '1996biggs', '1999', '1afyxaksy8', '1dmhhlf9fr', '1etzm5bbk2', '1f8fzlkhmj', '1fiycpyc2q', '1fsukoqhuf', '1g', '1glswczxby', '1gyn52lgnq', '1j0bhsaf32', '1ji1l5v6xb', '1kz3qi3oyg', '1lj607uj8q', '1m', '1qycnqw0hh', '1s61vkxzsc', '1st', '1vdfgoszcj', '1vp2s47ujp', '1w48yr818q', '1xudzktwvz', '1zzyzyx1', '20', '200', '2000', '2007', '200x', '201', '2010', '2011', '2014', '2016', '2018', '2019', '2020', '2021', '2022', '2023', '2024', '205', '20yr', '21', '210', '2188', '21andup', '21s', '21st', '22', '2240', '22gejup627', '23', '23hahpok6r', '24', '2497', '24ghgvb9jw', '24th', '25', '250', '250k', '250mg', '250usd']</code></pre>
+</div>
+</div>
+<p>This is the random 20 words. Based on the distribution and word list, we can see there are a lot of numbers and some non sense words in the list and distribution. So, I am going to remove these words and numbers in the next step</p>
+</section>
+<section id="remove-the-punctuation-dights-symbols-hashtags-etc.-non-word-characters." class="level2">
+<h2 class="anchored" data-anchor-id="remove-the-punctuation-dights-symbols-hashtags-etc.-non-word-characters.">Remove the punctuation, dights, symbols, hashtags etc. non-word characters.</h2>
+<div class="cell" data-execution_count="76">
+<div class="cell-output cell-output-stdout">
+<pre><code>['aahn', 'aaron', 'ab', 'abc', 'ability', 'able', 'abolished', 'abolitionism', 'abortion', 'abortions', 'abroad', 'absolute', 'absolutely', 'abt', 'abundance', 'abuse', 'abusers', 'accept', 'acceptable', 'accepted', 'accepts', 'access', 'accessory', 'accident', 'accomplished', 'according', 'account', 'accountant', 'accounts', 'accretive', 'accumulate', 'accurately', 'accustomed', 'ace', 'achieved', 'achievement', 'achievements', 'acid', 'acquiring', 'acquisition', 'acre', 'acres', 'acro', 'act', 'acted', 'acting', 'action', 'actions', 'active', 'activist', 'activists', 'activities', 'activity', 'actual', 'actually', 'ad', 'adam', 'adapter', 'add', 'added', 'adderall', 'addict', 'addicted', 'addiction', 'addictions', 'addictive', 'addicts', 'additionally', 'additives', 'addre', 'address', 'addressing', 'adelanto', 'adequate', 'adhd', 'adjustments', 'admin', 'administration', 'admiring', 'admission', 'admitted', 'adolescents', 'adult', 'adulting', 'adults', 'advance', 'advanced', 'adventure', 'advertising', 'advice', 'advisor', 'advisory', 'advocate', 'advocated', 'advocating', 'aew', 'af', 'afc', 'affected', 'affects', 'affiliated', 'affiliation', 'affirm', 'afford', 'affordable', 'affordably', 'aficionado', 'afraid', 'african', 'afro', 'afternoon', 'afterparty', 'afterschool', 'ag', 'age', 'ageism', 'agency', 'agenda', 'aggressive', 'aging', 'ago', 'agree', 'agreed', 'agreement', 'agrees', 'agricultural', 'agriculture', 'ahead', 'ahem', 'ahhh', 'ahhs', 'ai', 'aid', 'aids', 'aileen', 'ain', 'ainn', 'aint', 'air', 'airbnb', 'airplane', 'airport', 'ak', 'aka', 'al', 'alabama', 'alabaman', 'alarm', 'albert', 'alberta']</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="77">
+<div class="cell-output cell-output-display" data-execution_count="77">
+<pre><code>&lt;BarContainer object of 20 artists&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="datacleaning_Py_files/figure-html/cell-17-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<p>After removing all the punctuation, dights, symbols, hashtags, non-word characters etc. we can see the word list and distribution are more clearly now</p>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
