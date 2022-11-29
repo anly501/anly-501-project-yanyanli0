@@ -1,0 +1,1584 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.242">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>arm</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="ARM_files/libs/clipboard/clipboard.min.js"></script>
+<script src="ARM_files/libs/quarto-html/quarto.js"></script>
+<script src="ARM_files/libs/quarto-html/popper.min.js"></script>
+<script src="ARM_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="ARM_files/libs/quarto-html/anchor.min.js"></script>
+<link href="ARM_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="ARM_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="ARM_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="ARM_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="ARM_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contents</h2>
+   
+  <ul>
+  <li><a href="#introduction-to-arm" id="toc-introduction-to-arm" class="nav-link active" data-scroll-target="#introduction-to-arm">Introduction to ARM</a></li>
+  <li><a href="#train-arm-model-on-tweets" id="toc-train-arm-model-on-tweets" class="nav-link" data-scroll-target="#train-arm-model-on-tweets">Train ARM model on Tweets</a>
+  <ul class="collapse">
+  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation">Data Preparation</a></li>
+  <li><a href="#tokenization-and-lemmatization" id="toc-tokenization-and-lemmatization" class="nav-link" data-scroll-target="#tokenization-and-lemmatization">Tokenization and Lemmatization</a></li>
+  <li><a href="#sentiment-analysis" id="toc-sentiment-analysis" class="nav-link" data-scroll-target="#sentiment-analysis">Sentiment Analysis</a></li>
+  <li><a href="#transform-input-tweet-data" id="toc-transform-input-tweet-data" class="nav-link" data-scroll-target="#transform-input-tweet-data">Transform input Tweet data</a></li>
+  <li><a href="#training-model-and-result" id="toc-training-model-and-result" class="nav-link" data-scroll-target="#training-model-and-result">Training model and Result</a></li>
+  </ul></li>
+  <li><a href="#network-visualization" id="toc-network-visualization" class="nav-link" data-scroll-target="#network-visualization">Network Visualization</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference">Reference</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+
+
+<section id="introduction-to-arm" class="level1">
+<h1>Introduction to ARM</h1>
+<p>Apriori Algorithm is a Machine Learning algorithm which is used to gain insight into the structured relationships between different items involved. Apriori Algorithm works by looking at the frequent itemsets in a dataset and then using that information to generate association rules. These association rules can then be used to make predictions about new data. For example, if you had a dataset of supermarket transactions, you could use Apriori Algorithm to find out which items are often bought together. This information could then be used to make recommendations to customers, such as suggesting they buy bread when they buy milk. Apriori Algorithm is a powerful tool for understanding relationships within data, and can be used in a variety of applications.</p>
+<p>In this section, we will apply Apriori Algorithm to our tweet text data to see teh connection of the words in these tweet messages.</p>
+<div class="cell" data-execution_count="1">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> nltk</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> string</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.stem <span class="im">import</span> WordNetLemmatizer</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.stem <span class="im">import</span> PorterStemmer</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.corpus <span class="im">import</span> stopwords</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.tokenize <span class="im">import</span> word_tokenize</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.sentiment <span class="im">import</span> SentimentIntensityAnalyzer</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> apyori <span class="im">import</span> apriori</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="train-arm-model-on-tweets" class="level1">
+<h1>Train ARM model on Tweets</h1>
+<section id="data-preparation" class="level2">
+<h2 class="anchored" data-anchor-id="data-preparation">Data Preparation</h2>
+<p>The data I am going to use is the one we collected from pervious section and contains 2500 tweets. All of them are posed in English and related to the marijuana, cannabis and weed. Since they are all text-liked and are readable for us but not for computer, the first thing I need to do is to transform these tweet into ‘computer readable’ format. Here, I am going to do things called ‘Lemmatization’ and ‘Tokenization’.</p>
+<br>
+<li>
+Lemmatization: Lemmatization is basically grouping together words with the same root or lemma but with different inflections or derivatives of meaning so they can be analyzed as one item. The aim is to take away inflectional suffixes and prefixes to bring out the word’s dictionary form(Techslang, 2022).
+</li>
+<br>
+<li>
+Tokenization: this is a lot easier than lemmatization and it just simply break chunk of text into list of sentences or list of words
+</li>
+<p><br> If you feel like still a little confused, I will show you some example using our dataset</p>
+<div class="cell" data-execution_count="15">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df<span class="op">=</span>pd.read_csv(<span class="st">'clean_tweet_tone_df.csv'</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="15">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Unnamed: 0</th>
+      <th>Date</th>
+      <th>Language</th>
+      <th>Text</th>
+      <th>clean_text</th>
+      <th>tone</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>2022-09-11 22:22:28+00:00</td>
+      <td>en</td>
+      <td>All the medical pain and all the taxes spent p...</td>
+      <td>medical pain taxes spent putting people jail s...</td>
+      <td>-0.9531</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>2022-09-11 22:21:26+00:00</td>
+      <td>en</td>
+      <td>A good way to clean up your follower list is t...</td>
+      <td>good way clean follower list app called see fo...</td>
+      <td>0.9184</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>2022-09-11 22:12:16+00:00</td>
+      <td>en</td>
+      <td>@1zzyzyx1 @MeidasTouch @CharlieCrist legalize ...</td>
+      <td>legalize marijuana remove barriers desantis p...</td>
+      <td>-0.4404</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>2022-09-11 22:11:15+00:00</td>
+      <td>en</td>
+      <td>RT @snoopdoggslungz: 📸 Chem D\n🌱(ig) https://t...</td>
+      <td>rt chem d ig</td>
+      <td>0.0000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>2022-09-11 22:06:53+00:00</td>
+      <td>en</td>
+      <td>@BabzOnTheMic Off the weed bro. That’s 4 strai...</td>
+      <td>weed bro thats straight losses miami pats lon...</td>
+      <td>-0.6369</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2495</th>
+      <td>2495</td>
+      <td>2022-09-07 21:20:14+00:00</td>
+      <td>en</td>
+      <td>I just caught someone smoking their weed pen i...</td>
+      <td>caught someone smoking weed pen class hahahaha...</td>
+      <td>0.4019</td>
+    </tr>
+    <tr>
+      <th>2496</th>
+      <td>2496</td>
+      <td>2022-09-07 21:17:48+00:00</td>
+      <td>en</td>
+      <td>@AesPolitics And research shows black and brow...</td>
+      <td>research shows black brown people disproporti...</td>
+      <td>0.0000</td>
+    </tr>
+    <tr>
+      <th>2497</th>
+      <td>2497</td>
+      <td>2022-09-07 21:17:39+00:00</td>
+      <td>en</td>
+      <td>Smoke weed “ your not responsible and mentally...</td>
+      <td>smoke weed responsible mentally sick sober ser...</td>
+      <td>-0.8625</td>
+    </tr>
+    <tr>
+      <th>2498</th>
+      <td>2498</td>
+      <td>2022-09-07 21:09:58+00:00</td>
+      <td>en</td>
+      <td>People who call weed, cannabis. https://t.co/m...</td>
+      <td>people call weed cannabis</td>
+      <td>0.0000</td>
+    </tr>
+    <tr>
+      <th>2499</th>
+      <td>2499</td>
+      <td>2022-09-07 21:09:43+00:00</td>
+      <td>en</td>
+      <td>You were coughing when you hit my weed, but I’...</td>
+      <td>coughing hit weed ive never seen feel free</td>
+      <td>-0.4023</td>
+    </tr>
+  </tbody>
+</table>
+<p>2500 rows × 6 columns</p>
+</div>
+</div>
+</div>
+<p>Here is the dataset, I am going to use.</p>
+</section>
+<section id="tokenization-and-lemmatization" class="level2">
+<h2 class="anchored" data-anchor-id="tokenization-and-lemmatization">Tokenization and Lemmatization</h2>
+<p>Here is the result after done Tokenization and Lemmatization. We can see that we have 2500 tweets and there are 5867 different words among these tweets.</p>
+<div class="cell" data-execution_count="26">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> csv</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#USER PARAM</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>compute_sentiment   <span class="op">=</span>   <span class="va">True</span>        </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>sentiment           <span class="op">=</span>   []          <span class="co">#average sentiment of each chunck of text </span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>ave_window_size     <span class="op">=</span>   <span class="dv">250</span>         <span class="co">#size of scanning window for moving average</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                    </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">#OUTPUT FILE</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>output<span class="op">=</span><span class="st">'transactions.txt'</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> os.path.exists(output): os.remove(output)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co">#INITIALIZE</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>lemmatizer  <span class="op">=</span>   WordNetLemmatizer()</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>ps          <span class="op">=</span>   PorterStemmer()</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>sia         <span class="op">=</span>   SentimentIntensityAnalyzer()</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co">#ADD MORE</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co">#stopwords  =   stopwords.words('english')</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>add<span class="op">=</span>[<span class="st">'mr'</span>,<span class="st">'mrs'</span>,<span class="st">'wa'</span>,<span class="st">'dr'</span>,<span class="st">'said'</span>,<span class="st">'back'</span>,<span class="st">'could'</span>,<span class="st">'one'</span>,<span class="st">'looked'</span>,<span class="st">'like'</span>,<span class="st">'know'</span>,<span class="st">'around'</span>,<span class="st">'dont'</span>]</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> sp <span class="kw">in</span> add: stopwords.append(sp)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> read_and_clean():</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    <span class="kw">global</span> sentiment </span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    <span class="co">#BREAK INTO CHUNKS (SENTANCES OR OTHERWISE)</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    sentences<span class="op">=</span>df[<span class="st">'clean_text'</span>].to_list()</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"NUMBER OF SENTENCES FOUND:"</span>,<span class="bu">len</span>(sentences))<span class="op">;</span> <span class="co">#print(sentences)</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    <span class="co">#CLEAN AND LEMMATIZE</span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>    keep<span class="op">=</span><span class="st">'0123456789abcdefghijklmnopqrstuvwxy'</span><span class="op">;</span></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>    new_sentences<span class="op">=</span>[]<span class="op">;</span> vocabulary<span class="op">=</span>[]</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> sentence <span class="kw">in</span> sentences:</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>        new_sentence<span class="op">=</span><span class="st">''</span></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>        <span class="co"># REBUILD LEMITIZED SENTENCE</span></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> word <span class="kw">in</span> sentence.split():</span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>            <span class="co">#ONLY KEEP CHAR IN "keep"</span></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>            tmp2<span class="op">=</span><span class="st">''</span></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> char <span class="kw">in</span> word: </span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span>(char <span class="kw">in</span> keep): </span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>                    tmp2<span class="op">=</span>tmp2<span class="op">+</span>char</span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>                <span class="cf">else</span>:</span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>                    tmp2<span class="op">=</span>tmp2<span class="op">+</span><span class="st">' '</span></span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>            word<span class="op">=</span>tmp2</span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>            <span class="co">#-----------------------</span></span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>            <span class="co"># INSERT CODE TO LEMMATIZE THE WORDS</span></span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>            new_word<span class="op">=</span>lemmatizer.lemmatize(word)</span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>            <span class="co">#-----------------------</span></span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>            <span class="co">#REMOVE WHITE SPACES</span></span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>            new_word<span class="op">=</span>new_word.replace(<span class="st">' '</span>, <span class="st">''</span>)</span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>            <span class="co">#BUILD NEW SENTANCE BACK UP</span></span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span>( new_word <span class="kw">not</span> <span class="kw">in</span> stopwords):</span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span>(new_sentence<span class="op">==</span><span class="st">''</span>):</span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>                    new_sentence<span class="op">=</span>new_word</span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a>                <span class="cf">else</span>:</span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>                    new_sentence<span class="op">=</span>new_sentence<span class="op">+</span><span class="st">','</span><span class="op">+</span>new_word</span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span>(new_word <span class="kw">not</span> <span class="kw">in</span> vocabulary): vocabulary.append(new_word)</span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a>        <span class="co">#SAVE (LIST OF LISTS)       </span></span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a>        new_sentences.append(new_sentence.split(<span class="st">","</span>))</span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a>        new_sentences</span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a>        <span class="co">#print(new_sentences)</span></span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a>        <span class="co">#SIA</span></span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span>(compute_sentiment):</span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a>            <span class="co">#-----------------------</span></span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a>            <span class="co"># INSERT CODE TO USE NLTK TO DO SENTIMENT ANALYSIS </span></span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a>            text1<span class="op">=</span>new_sentence.replace(<span class="st">','</span>,<span class="st">' '</span>)</span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a>            score <span class="op">=</span> sia.polarity_scores(text1)</span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a>            sentiment.append([score[<span class="st">'neg'</span>],score[<span class="st">'neu'</span>],score[<span class="st">'pos'</span>],score[<span class="st">'compound'</span>]])</span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a>            <span class="co">#-----------------------</span></span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a>        <span class="co">#SAVE SENTANCE TO OUTPUT FILE</span></span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span>(<span class="bu">len</span>(new_sentence.split(<span class="st">','</span>))<span class="op">&gt;</span><span class="dv">2</span>):</span>
+<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>            f <span class="op">=</span> <span class="bu">open</span>(output, <span class="st">"a"</span>)</span>
+<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a>            f.write(new_sentence<span class="op">+</span><span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a>            f.close()</span>
+<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a>    sentiment<span class="op">=</span>np.array(sentiment)</span>
+<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"TOTAL AVERAGE SENTEMENT:"</span>,np.mean(sentiment,axis<span class="op">=</span><span class="dv">0</span>))</span>
+<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"VOCAB LENGTH"</span>,<span class="bu">len</span>(vocabulary))</span>
+<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> new_sentences</span>
+<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a>transactions<span class="op">=</span>read_and_clean()</span>
+<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"First 5 tweets after Tokenization and Lemmatization:"</span>)</span>
+<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(transactions[<span class="dv">0</span>:<span class="dv">5</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>NUMBER OF SENTENCES FOUND: 2500
+TOTAL AVERAGE SENTEMENT: [0.1012328  0.7450916  0.153676   0.08015548]
+VOCAB LENGTH 5867
+First 5 tweets after Tokenization and Lemmatization:
+[['medical', 'pain', 'tax', 'spent', 'putting', 'people', 'jail', 'sin', 'big', 'pharma', 'fear', 'legal', 'marijuana', 'amp', 'terrorism', 'victim', 'blocked', 'u', 'gover', 'via'], ['good', 'way', 'clean', 'follower', 'list', 'app', 'called', 'see', 'follow', 'go', 'long', 'list', 'weed', 'plus', 'find', 'block', 'every', 'time', 'lmao', 'free', 'highly', 'recommended', 'go', 'get'], ['legalie', 'marijuana', 'remove', 'barrier', 'desantis', 'put', 'place', 'block', 'voting', 'including', 'incarcerated'], ['rt', 'chem', 'ig'], ['weed', 'bro', 'thats', 'straight', 'loss', 'miami', 'pat', 'longer', 'threat', 'afc', 'east']]</code></pre>
+</div>
+</div>
+<p>Here is the Comparison Before and After Tokenization and Lemmatization using first tweet as example. <br> We can clearly see that the sentence is broken into word list (tokenization) and word ‘taxes’ becomes ‘tax’ (lemmatization)</p>
+<div class="cell" data-execution_count="27">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"    "</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Comparison Before and After Tokenization and Lemmatization"</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"    "</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[<span class="st">'clean_text'</span>].to_list()[<span class="dv">0</span>])</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"    "</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'---------------------After Tokenization and Lemmatization----------------------------------- '</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"    "</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(transactions[<span class="dv">0</span>:<span class="dv">5</span>][<span class="dv">0</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>    
+Comparison Before and After Tokenization and Lemmatization
+    
+medical pain taxes spent putting people jail sin big pharma fears legal marijuana amp terrorism victims blocked us gover via 
+    
+---------------------After Tokenization and Lemmatization----------------------------------- 
+    
+['medical', 'pain', 'tax', 'spent', 'putting', 'people', 'jail', 'sin', 'big', 'pharma', 'fear', 'legal', 'marijuana', 'amp', 'terrorism', 'victim', 'blocked', 'u', 'gover', 'via']</code></pre>
+</div>
+</div>
+</section>
+<section id="sentiment-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="sentiment-analysis">Sentiment Analysis</h2>
+<p>Sentiment Analysis is the process of ‘computationally’ determining whether a piece of writing is positive, negative or neutral. It’s also known as opinion mining, deriving the opinion or attitude of a speaker (Python). Here I am going to use the function called “SentimentIntensityAnalyzer” to analysis the tone of each tweets. For each tweet, we’ll get four values, corresponding to “negative”, “neutral”, “positive” and “compound”. The first three values will be in the range 0 to 1, the last value representing the combination of the first three values will be in the range -1 to 1. If the tone of this tweet represents a like, the compound value will be close to 1, and if the tone of this tweet is a hate, it will be close to -1.</p>
+<div class="cell" data-execution_count="4">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> preprocessing</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> moving_ave(y,w<span class="op">=</span><span class="dv">100</span>):</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">#-----------------------</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># INSERT CODE TO COMPUTE THE MOVING AVERAGE OF A SIGNAL Y</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">#-----------------------</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    res<span class="op">=</span>pd.DataFrame(y).rolling(w).mean()</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> preprocessing.scale(res)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co"># INSERT CODE TO VISUALIZE THE SENTIMENT ANALYSIS AS A TIME-SERIES (SEE PLOT FOR AN EXAMPLE)</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>neg<span class="op">=</span>moving_ave(sentiment[:,<span class="dv">0</span>])</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>neu<span class="op">=</span>moving_ave(sentiment[:,<span class="dv">1</span>])</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>pos<span class="op">=</span>moving_ave(sentiment[:,<span class="dv">2</span>])</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>text_num <span class="op">=</span> np.linspace(<span class="dv">0</span>,<span class="bu">len</span>(sentiment),<span class="bu">len</span>(sentiment))</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">5</span>))</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>plt.plot(text_num,neg,label<span class="op">=</span><span class="st">'Negative'</span>)</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>plt.plot(text_num,pos,label<span class="op">=</span><span class="st">'Positive'</span>)</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="st">'upper left'</span>)</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<p><img src="ARM_files/figure-html/cell-6-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>Here is the line plot for the sentiment score for each tweet.</p>
+</section>
+<section id="transform-input-tweet-data" class="level2">
+<h2 class="anchored" data-anchor-id="transform-input-tweet-data">Transform input Tweet data</h2>
+<p>So after done tokenization and lemmanization, we got a list of word list where each word list represent a tweet content. Now, I’m going to transfer them into Pandas data frame format which is more straightforward and can be directly used for model training.</p>
+<div class="cell" data-execution_count="5">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> reformat_results(results):</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">#CLEAN-UP RESULTS </span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    keep<span class="op">=</span>[]</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>,<span class="bu">len</span>(results)):</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>        <span class="co"># print("=====================================")</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>        <span class="co"># print(results[i])</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>        <span class="co"># print(len(list(results[i])))</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>,<span class="bu">len</span>(<span class="bu">list</span>(results[i]))):</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>            <span class="co"># print(results)</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span>(j<span class="op">&gt;</span><span class="dv">1</span>):</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>                <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>,<span class="bu">len</span>(<span class="bu">list</span>(results[i][j]))):</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">if</span>(<span class="bu">len</span>(results[i][j][k][<span class="dv">0</span>])<span class="op">!=</span><span class="dv">0</span>):</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>                        <span class="co">#print(len(results[i][j][k][0]),results[i][j][k][0])</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>                        rhs<span class="op">=</span><span class="bu">list</span>(results[i][j][k][<span class="dv">0</span>])</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>                        lhs<span class="op">=</span><span class="bu">list</span>(results[i][j][k][<span class="dv">1</span>])</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>                        conf<span class="op">=</span><span class="bu">float</span>(results[i][j][k][<span class="dv">2</span>])</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>                        lift<span class="op">=</span><span class="bu">float</span>(results[i][j][k][<span class="dv">3</span>])</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>                        keep.append([rhs,lhs,supp,conf,supp<span class="op">*</span>conf,lift])</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>                        <span class="co"># keep.append()</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span>(j<span class="op">==</span><span class="dv">1</span>):</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>                supp<span class="op">=</span>results[i][j]</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pd.DataFrame(keep, columns <span class="op">=</span>[<span class="st">"rhs"</span>,<span class="st">"lhs"</span>,<span class="st">"supp"</span>,<span class="st">"conf"</span>,<span class="st">"supp x conf"</span>,<span class="st">"lift"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="6">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> convert_to_network(df):</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(df)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">#BUILD GRAPH</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    G <span class="op">=</span> nx.DiGraph()  <span class="co"># DIRECTED</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> row <span class="kw">in</span> df.iterrows():</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>        <span class="co"># for column in df.columns:</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>        lhs<span class="op">=</span><span class="st">"_"</span>.join(row[<span class="dv">1</span>][<span class="dv">0</span>])</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>        rhs<span class="op">=</span><span class="st">"_"</span>.join(row[<span class="dv">1</span>][<span class="dv">1</span>])</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>        conf<span class="op">=</span>row[<span class="dv">1</span>][<span class="dv">3</span>]<span class="op">;</span> <span class="co">#print(conf)</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span>(lhs <span class="kw">not</span> <span class="kw">in</span> G.nodes): </span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>            G.add_node(lhs)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span>(rhs <span class="kw">not</span> <span class="kw">in</span> G.nodes): </span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>            G.add_node(rhs)</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>        edge<span class="op">=</span>(lhs,rhs)</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> edge <span class="kw">not</span> <span class="kw">in</span> G.edges:</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>            G.add_edge(lhs, rhs, weight<span class="op">=</span>conf)</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># print(G.nodes)</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># print(G.edges)</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> G</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="7">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_network(G):</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">#SPECIFIY X-Y POSITIONS FOR PLOTTING</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    pos<span class="op">=</span>nx.random_layout(G)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">#GENERATE PLOT</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    fig.set_size_inches(<span class="dv">15</span>, <span class="dv">15</span>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">#assign colors based on attributes</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    weights_e   <span class="op">=</span> [G[u][v][<span class="st">'weight'</span>] <span class="cf">for</span> u,v <span class="kw">in</span> G.edges()]</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">#SAMPLE CMAP FOR COLORS </span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span>plt.cm.get_cmap(<span class="st">'Blues'</span>)</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    colors_e    <span class="op">=</span> [cmap(G[u][v][<span class="st">'weight'</span>]<span class="op">*</span><span class="dv">10</span>) <span class="cf">for</span> u,v <span class="kw">in</span> G.edges()]</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">#PLOT</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    nx.draw(</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    G,</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    edgecolors<span class="op">=</span><span class="st">"black"</span>,</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>    edge_color<span class="op">=</span>colors_e,</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>    node_size<span class="op">=</span><span class="dv">2000</span>,</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>    linewidths<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>    font_size<span class="op">=</span><span class="dv">8</span>,</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>    font_color<span class="op">=</span><span class="st">"white"</span>,</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>    font_weight<span class="op">=</span><span class="st">"bold"</span>,</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>    width<span class="op">=</span>weights_e,</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>    with_labels<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>    pos<span class="op">=</span>pos,</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>    ax<span class="op">=</span>ax</span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>    ax.<span class="bu">set</span>(title<span class="op">=</span><span class="st">'Dracula'</span>)</span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="8">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(transactions)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="8">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+      <th>7</th>
+      <th>8</th>
+      <th>9</th>
+      <th>...</th>
+      <th>33</th>
+      <th>34</th>
+      <th>35</th>
+      <th>36</th>
+      <th>37</th>
+      <th>38</th>
+      <th>39</th>
+      <th>40</th>
+      <th>41</th>
+      <th>42</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>medical</td>
+      <td>pain</td>
+      <td>tax</td>
+      <td>spent</td>
+      <td>putting</td>
+      <td>people</td>
+      <td>jail</td>
+      <td>sin</td>
+      <td>big</td>
+      <td>pharma</td>
+      <td>...</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>good</td>
+      <td>way</td>
+      <td>clean</td>
+      <td>follower</td>
+      <td>list</td>
+      <td>app</td>
+      <td>called</td>
+      <td>see</td>
+      <td>follow</td>
+      <td>go</td>
+      <td>...</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>legalie</td>
+      <td>marijuana</td>
+      <td>remove</td>
+      <td>barrier</td>
+      <td>desantis</td>
+      <td>put</td>
+      <td>place</td>
+      <td>block</td>
+      <td>voting</td>
+      <td>including</td>
+      <td>...</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>rt</td>
+      <td>chem</td>
+      <td>ig</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>...</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>weed</td>
+      <td>bro</td>
+      <td>thats</td>
+      <td>straight</td>
+      <td>loss</td>
+      <td>miami</td>
+      <td>pat</td>
+      <td>longer</td>
+      <td>threat</td>
+      <td>afc</td>
+      <td>...</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2495</th>
+      <td>caught</td>
+      <td>someone</td>
+      <td>smoking</td>
+      <td>weed</td>
+      <td>pen</td>
+      <td>class</td>
+      <td>hahahahahahahaha</td>
+      <td>yes</td>
+      <td>yt</td>
+      <td>None</td>
+      <td>...</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>2496</th>
+      <td>research</td>
+      <td>show</td>
+      <td>black</td>
+      <td>brown</td>
+      <td>people</td>
+      <td>disproportionately</td>
+      <td>impacted</td>
+      <td>prohibition</td>
+      <td>cannabis</td>
+      <td>right</td>
+      <td>...</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>2497</th>
+      <td>smoke</td>
+      <td>weed</td>
+      <td>responsible</td>
+      <td>mentally</td>
+      <td>sick</td>
+      <td>sober</td>
+      <td>serious</td>
+      <td>bout</td>
+      <td>life</td>
+      <td>fuck</td>
+      <td>...</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>2498</th>
+      <td>people</td>
+      <td>call</td>
+      <td>weed</td>
+      <td>cannabis</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>...</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>2499</th>
+      <td>coughing</td>
+      <td>hit</td>
+      <td>weed</td>
+      <td>ive</td>
+      <td>never</td>
+      <td>seen</td>
+      <td>feel</td>
+      <td>free</td>
+      <td>None</td>
+      <td>None</td>
+      <td>...</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+  </tbody>
+</table>
+<p>2500 rows × 43 columns</p>
+</div>
+</div>
+</div>
+<p>Here is the input dataset after done transformation. We can see each row represent each tweet and we tokenize the all the tweets into single word. We also call this format ‘Transaction’</p>
+</section>
+<section id="training-model-and-result" class="level2">
+<h2 class="anchored" data-anchor-id="training-model-and-result">Training model and Result</h2>
+<div class="cell" data-execution_count="12">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>results<span class="op">=</span><span class="bu">list</span>(apriori(transactions,min_support <span class="op">=</span> <span class="fl">0.038</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="29">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>pd_results<span class="op">=</span>reformat_results(results)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">#print("Results\n",pd_results)</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>pd_results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="29">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>rhs</th>
+      <th>lhs</th>
+      <th>supp</th>
+      <th>conf</th>
+      <th>supp x conf</th>
+      <th>lift</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>[ca]</td>
+      <td>[cannabis]</td>
+      <td>0.0408</td>
+      <td>0.350515</td>
+      <td>0.014301</td>
+      <td>1.656500</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>[cannabis]</td>
+      <td>[ca]</td>
+      <td>0.0408</td>
+      <td>0.192817</td>
+      <td>0.007867</td>
+      <td>1.656500</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>[ca]</td>
+      <td>[rt]</td>
+      <td>0.0416</td>
+      <td>0.357388</td>
+      <td>0.014867</td>
+      <td>1.639396</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>[rt]</td>
+      <td>[ca]</td>
+      <td>0.0416</td>
+      <td>0.190826</td>
+      <td>0.007938</td>
+      <td>1.639396</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>[ca]</td>
+      <td>[weed]</td>
+      <td>0.0460</td>
+      <td>0.395189</td>
+      <td>0.018179</td>
+      <td>0.764093</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>[weed]</td>
+      <td>[ca]</td>
+      <td>0.0460</td>
+      <td>0.088940</td>
+      <td>0.004091</td>
+      <td>0.764093</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>[cannabis]</td>
+      <td>[rt]</td>
+      <td>0.0724</td>
+      <td>0.342155</td>
+      <td>0.024772</td>
+      <td>1.569518</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>[rt]</td>
+      <td>[cannabis]</td>
+      <td>0.0724</td>
+      <td>0.332110</td>
+      <td>0.024045</td>
+      <td>1.569518</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>[city]</td>
+      <td>[county]</td>
+      <td>0.0384</td>
+      <td>0.864865</td>
+      <td>0.033211</td>
+      <td>19.134178</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>[county]</td>
+      <td>[city]</td>
+      <td>0.0384</td>
+      <td>0.849558</td>
+      <td>0.032623</td>
+      <td>19.134178</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>[city]</td>
+      <td>[court]</td>
+      <td>0.0380</td>
+      <td>0.855856</td>
+      <td>0.032523</td>
+      <td>21.833058</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>[court]</td>
+      <td>[city]</td>
+      <td>0.0380</td>
+      <td>0.969388</td>
+      <td>0.036837</td>
+      <td>21.833058</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>[city]</td>
+      <td>[weed]</td>
+      <td>0.0400</td>
+      <td>0.900901</td>
+      <td>0.036036</td>
+      <td>1.741881</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>[weed]</td>
+      <td>[city]</td>
+      <td>0.0400</td>
+      <td>0.077340</td>
+      <td>0.003094</td>
+      <td>1.741881</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>[county]</td>
+      <td>[siskiyou]</td>
+      <td>0.0396</td>
+      <td>0.876106</td>
+      <td>0.034694</td>
+      <td>21.902655</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>[siskiyou]</td>
+      <td>[county]</td>
+      <td>0.0396</td>
+      <td>0.990000</td>
+      <td>0.039204</td>
+      <td>21.902655</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>[county]</td>
+      <td>[weed]</td>
+      <td>0.0388</td>
+      <td>0.858407</td>
+      <td>0.033306</td>
+      <td>1.659720</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>[weed]</td>
+      <td>[county]</td>
+      <td>0.0388</td>
+      <td>0.075019</td>
+      <td>0.002911</td>
+      <td>1.659720</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>[court]</td>
+      <td>[way]</td>
+      <td>0.0380</td>
+      <td>0.969388</td>
+      <td>0.036837</td>
+      <td>16.264895</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>[way]</td>
+      <td>[court]</td>
+      <td>0.0380</td>
+      <td>0.637584</td>
+      <td>0.024228</td>
+      <td>16.264895</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>[court]</td>
+      <td>[weed]</td>
+      <td>0.0380</td>
+      <td>0.969388</td>
+      <td>0.036837</td>
+      <td>1.874300</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>[weed]</td>
+      <td>[court]</td>
+      <td>0.0380</td>
+      <td>0.073473</td>
+      <td>0.002792</td>
+      <td>1.874300</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>[rt]</td>
+      <td>[weed]</td>
+      <td>0.0520</td>
+      <td>0.238532</td>
+      <td>0.012404</td>
+      <td>0.461199</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>[weed]</td>
+      <td>[rt]</td>
+      <td>0.0520</td>
+      <td>0.100541</td>
+      <td>0.005228</td>
+      <td>0.461199</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>[siskiyou]</td>
+      <td>[weed]</td>
+      <td>0.0384</td>
+      <td>0.960000</td>
+      <td>0.036864</td>
+      <td>1.856148</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>[weed]</td>
+      <td>[siskiyou]</td>
+      <td>0.0384</td>
+      <td>0.074246</td>
+      <td>0.002851</td>
+      <td>1.856148</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>[smoke]</td>
+      <td>[weed]</td>
+      <td>0.0584</td>
+      <td>0.895706</td>
+      <td>0.052309</td>
+      <td>1.731836</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>[weed]</td>
+      <td>[smoke]</td>
+      <td>0.0584</td>
+      <td>0.112916</td>
+      <td>0.006594</td>
+      <td>1.731836</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>[smoking]</td>
+      <td>[weed]</td>
+      <td>0.0392</td>
+      <td>0.882883</td>
+      <td>0.034609</td>
+      <td>1.707043</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>[weed]</td>
+      <td>[smoking]</td>
+      <td>0.0392</td>
+      <td>0.075793</td>
+      <td>0.002971</td>
+      <td>1.707043</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>[way]</td>
+      <td>[weed]</td>
+      <td>0.0488</td>
+      <td>0.818792</td>
+      <td>0.039957</td>
+      <td>1.583124</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>[weed]</td>
+      <td>[way]</td>
+      <td>0.0488</td>
+      <td>0.094354</td>
+      <td>0.004604</td>
+      <td>1.583124</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>[county]</td>
+      <td>[weed, siskiyou]</td>
+      <td>0.0384</td>
+      <td>0.849558</td>
+      <td>0.032623</td>
+      <td>22.123894</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>[siskiyou]</td>
+      <td>[weed, county]</td>
+      <td>0.0384</td>
+      <td>0.960000</td>
+      <td>0.036864</td>
+      <td>24.742268</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>[weed]</td>
+      <td>[county, siskiyou]</td>
+      <td>0.0384</td>
+      <td>0.074246</td>
+      <td>0.002851</td>
+      <td>1.874897</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>[county, siskiyou]</td>
+      <td>[weed]</td>
+      <td>0.0384</td>
+      <td>0.969697</td>
+      <td>0.037236</td>
+      <td>1.874897</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>[weed, county]</td>
+      <td>[siskiyou]</td>
+      <td>0.0384</td>
+      <td>0.989691</td>
+      <td>0.038004</td>
+      <td>24.742268</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>[weed, siskiyou]</td>
+      <td>[county]</td>
+      <td>0.0384</td>
+      <td>1.000000</td>
+      <td>0.038400</td>
+      <td>22.123894</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>[court]</td>
+      <td>[weed, way]</td>
+      <td>0.0380</td>
+      <td>0.969388</td>
+      <td>0.036837</td>
+      <td>19.864503</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>[way]</td>
+      <td>[court, weed]</td>
+      <td>0.0380</td>
+      <td>0.637584</td>
+      <td>0.024228</td>
+      <td>16.778523</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>[weed]</td>
+      <td>[court, way]</td>
+      <td>0.0380</td>
+      <td>0.073473</td>
+      <td>0.002792</td>
+      <td>1.933488</td>
+    </tr>
+    <tr>
+      <th>41</th>
+      <td>[court, way]</td>
+      <td>[weed]</td>
+      <td>0.0380</td>
+      <td>1.000000</td>
+      <td>0.038000</td>
+      <td>1.933488</td>
+    </tr>
+    <tr>
+      <th>42</th>
+      <td>[court, weed]</td>
+      <td>[way]</td>
+      <td>0.0380</td>
+      <td>1.000000</td>
+      <td>0.038000</td>
+      <td>16.778523</td>
+    </tr>
+    <tr>
+      <th>43</th>
+      <td>[weed, way]</td>
+      <td>[court]</td>
+      <td>0.0380</td>
+      <td>0.778689</td>
+      <td>0.029590</td>
+      <td>19.864503</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+Here is our result set. <br>
+<li>
+supp: represents ‘Support’ and it can describe how common the set is. For example, Sup(A, B): Measures How often item-set with A and items in B occur together relative to all other transactions
+</li>
+<br>
+<li>
+conf: represents ‘Confidence’. For example, Conf(A, B) Measures how often items in A and items in B occur together, relative to transactions that contain A
+</li>
+<br>
+<li>
+supp x conf:is the product of support and confidence; Large support means frequently occurring rules, and large confidence means “strong” rules therefore a large products suggests the rule is frequent and strong
+</li>
+<br>
+<li>
+lift: is the ratio of the observed support to that expected if X and Y were independent. It given by the following equation: Lift(X,Y) = Supp(X and Y)/(Supp(X)*Supp(Y))
+</li>
+<p><br></p>
+</section>
+</section>
+<section id="network-visualization" class="level1">
+<h1>Network Visualization</h1>
+<p>Network visualization is the practice of creating and displaying graphical representations of network devices, network metrics, and data flows. It involves the visualization of the relationships (edges or links) between data elements (nodes).</p>
+<p>Based on the result, lets visualize it</p>
+<div class="cell" data-execution_count="14">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>G<span class="op">=</span>convert_to_network(pd_results)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>plot_network(G)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   rhs                 lhs    supp      conf  supp x conf  \
+0                 [ca]          [cannabis]  0.0408  0.350515     0.014301   
+1           [cannabis]                [ca]  0.0408  0.192817     0.007867   
+2                 [ca]                [rt]  0.0416  0.357388     0.014867   
+3                 [rt]                [ca]  0.0416  0.190826     0.007938   
+4                 [ca]              [weed]  0.0460  0.395189     0.018179   
+5               [weed]                [ca]  0.0460  0.088940     0.004091   
+6           [cannabis]                [rt]  0.0724  0.342155     0.024772   
+7                 [rt]          [cannabis]  0.0724  0.332110     0.024045   
+8               [city]            [county]  0.0384  0.864865     0.033211   
+9             [county]              [city]  0.0384  0.849558     0.032623   
+10              [city]             [court]  0.0380  0.855856     0.032523   
+11             [court]              [city]  0.0380  0.969388     0.036837   
+12              [city]              [weed]  0.0400  0.900901     0.036036   
+13              [weed]              [city]  0.0400  0.077340     0.003094   
+14            [county]          [siskiyou]  0.0396  0.876106     0.034694   
+15          [siskiyou]            [county]  0.0396  0.990000     0.039204   
+16            [county]              [weed]  0.0388  0.858407     0.033306   
+17              [weed]            [county]  0.0388  0.075019     0.002911   
+18             [court]               [way]  0.0380  0.969388     0.036837   
+19               [way]             [court]  0.0380  0.637584     0.024228   
+20             [court]              [weed]  0.0380  0.969388     0.036837   
+21              [weed]             [court]  0.0380  0.073473     0.002792   
+22                [rt]              [weed]  0.0520  0.238532     0.012404   
+23              [weed]                [rt]  0.0520  0.100541     0.005228   
+24          [siskiyou]              [weed]  0.0384  0.960000     0.036864   
+25              [weed]          [siskiyou]  0.0384  0.074246     0.002851   
+26             [smoke]              [weed]  0.0584  0.895706     0.052309   
+27              [weed]             [smoke]  0.0584  0.112916     0.006594   
+28           [smoking]              [weed]  0.0392  0.882883     0.034609   
+29              [weed]           [smoking]  0.0392  0.075793     0.002971   
+30               [way]              [weed]  0.0488  0.818792     0.039957   
+31              [weed]               [way]  0.0488  0.094354     0.004604   
+32            [county]    [weed, siskiyou]  0.0384  0.849558     0.032623   
+33          [siskiyou]      [weed, county]  0.0384  0.960000     0.036864   
+34              [weed]  [county, siskiyou]  0.0384  0.074246     0.002851   
+35  [county, siskiyou]              [weed]  0.0384  0.969697     0.037236   
+36      [weed, county]          [siskiyou]  0.0384  0.989691     0.038004   
+37    [weed, siskiyou]            [county]  0.0384  1.000000     0.038400   
+38             [court]         [weed, way]  0.0380  0.969388     0.036837   
+39               [way]       [court, weed]  0.0380  0.637584     0.024228   
+40              [weed]        [court, way]  0.0380  0.073473     0.002792   
+41        [court, way]              [weed]  0.0380  1.000000     0.038000   
+42       [court, weed]               [way]  0.0380  1.000000     0.038000   
+43         [weed, way]             [court]  0.0380  0.778689     0.029590   
+
+         lift  
+0    1.656500  
+1    1.656500  
+2    1.639396  
+3    1.639396  
+4    0.764093  
+5    0.764093  
+6    1.569518  
+7    1.569518  
+8   19.134178  
+9   19.134178  
+10  21.833058  
+11  21.833058  
+12   1.741881  
+13   1.741881  
+14  21.902655  
+15  21.902655  
+16   1.659720  
+17   1.659720  
+18  16.264895  
+19  16.264895  
+20   1.874300  
+21   1.874300  
+22   0.461199  
+23   0.461199  
+24   1.856148  
+25   1.856148  
+26   1.731836  
+27   1.731836  
+28   1.707043  
+29   1.707043  
+30   1.583124  
+31   1.583124  
+32  22.123894  
+33  24.742268  
+34   1.874897  
+35   1.874897  
+36  24.742268  
+37  22.123894  
+38  19.864503  
+39  16.778523  
+40   1.933488  
+41   1.933488  
+42  16.778523  
+43  19.864503  </code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="ARM_files/figure-html/cell-13-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+</section>
+<section id="summary" class="level1">
+<h1>Summary</h1>
+<p>Based on the network visualization, we can see (Smoke, Weed) is the common set showing in these 2500 tweets and it actually make senses because it reasonable to have the set like this. Also, some other set like (ca, cannabis), (ca,weed) etc. It makes sense whether CA means California or Canada. Because whether it is California or Canada, the smoking marijuana is legal. The one interesting me most is the sets (siskiyou, county) and (county, weed). I don’t know why I would get these two sets in return with such hight correlation between these word, until I did some research that siskiyou is actually a city in California and there is a town called weed.</p>
+</section>
+<section id="reference" class="level1">
+<h1>Reference</h1>
+<p>Techslang. (2020, November 20). What is lemmatization? - definition by Techslang. Techslang. Retrieved November 28, 2022, from https://www.techslang.com/definition/what-is-lemmatization/</p>
+<p>Python: Sentiment analysis using Vader. GeeksforGeeks. (2021, October 7). Retrieved November 28, 2022, from https://www.geeksforgeeks.org/python-sentiment-analysis-using-vader/</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -1084,32 +1084,31 @@ Normalize the numerical data
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib inline</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>NDIM <span class="op">=</span><span class="dv">5</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Define a function to plot the result. Base on the dimensions of the result. choose to reduce the dimensionize it or not</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot(title<span class="op">=</span><span class="st">''</span>):</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(NDIM<span class="op">==</span><span class="dv">2</span>):</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>        fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>        sp<span class="op">=</span>ax.scatter(X[:,<span class="dv">0</span>], X[:,<span class="dv">1</span>],c<span class="op">=</span>labels,marker<span class="op">=</span><span class="st">"."</span>, cmap<span class="op">=</span><span class="st">"viridis"</span>)</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>        plt.colorbar(sp)</span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(NDIM<span class="op">==</span><span class="dv">3</span>):</span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>        fig <span class="op">=</span> plt.figure()</span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>        ax <span class="op">=</span> fig.add_subplot(projection<span class="op">=</span><span class="st">'3d'</span>)</span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>        sp<span class="op">=</span>ax.scatter(X[:,<span class="dv">0</span>],X[:,<span class="dv">1</span>],X[:,<span class="dv">2</span>],c<span class="op">=</span>labels,marker<span class="op">=</span><span class="st">"."</span>, cmap<span class="op">=</span><span class="st">"viridis"</span>)</span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>        plt.colorbar(sp)</span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">#DO PCA TO VISUALIZE</span></span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(NDIM<span class="op">&gt;</span><span class="dv">3</span>):</span>
-<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>        <span class="im">from</span> sklearn.decomposition <span class="im">import</span> PCA</span>
-<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>        pca <span class="op">=</span> PCA(n_components<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>        pca.fit(X)</span>
-<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>        Y<span class="op">=</span>pca.fit_transform(X)</span>
-<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>        fig <span class="op">=</span> plt.figure()</span>
-<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>        ax <span class="op">=</span> fig.add_subplot(projection<span class="op">=</span><span class="st">'3d'</span>)</span>
-<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>        sp<span class="op">=</span>ax.scatter(Y[:,<span class="dv">0</span>],Y[:,<span class="dv">1</span>],Y[:,<span class="dv">2</span>],c<span class="op">=</span>labels,marker<span class="op">=</span><span class="st">"."</span>, cmap<span class="op">=</span><span class="st">"viridis"</span>)</span>
-<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>        plt.colorbar(sp)</span>
-<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>    plt.title(title)</span>
-<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
-<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot(title<span class="op">=</span><span class="st">''</span>):</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(NDIM<span class="op">==</span><span class="dv">2</span>):</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>        fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>        sp<span class="op">=</span>ax.scatter(X[:,<span class="dv">0</span>], X[:,<span class="dv">1</span>],c<span class="op">=</span>labels,marker<span class="op">=</span><span class="st">"."</span>, cmap<span class="op">=</span><span class="st">"viridis"</span>)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>        plt.colorbar(sp)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(NDIM<span class="op">==</span><span class="dv">3</span>):</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>        fig <span class="op">=</span> plt.figure()</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>        ax <span class="op">=</span> fig.add_subplot(projection<span class="op">=</span><span class="st">'3d'</span>)</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>        sp<span class="op">=</span>ax.scatter(X[:,<span class="dv">0</span>],X[:,<span class="dv">1</span>],X[:,<span class="dv">2</span>],c<span class="op">=</span>labels,marker<span class="op">=</span><span class="st">"."</span>, cmap<span class="op">=</span><span class="st">"viridis"</span>)</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>        plt.colorbar(sp)</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">#DO PCA TO VISUALIZE</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(NDIM<span class="op">&gt;</span><span class="dv">3</span>):</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>        <span class="im">from</span> sklearn.decomposition <span class="im">import</span> PCA</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>        pca <span class="op">=</span> PCA(n_components<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>        pca.fit(X)</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>        Y<span class="op">=</span>pca.fit_transform(X)</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>        fig <span class="op">=</span> plt.figure()</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>        ax <span class="op">=</span> fig.add_subplot(projection<span class="op">=</span><span class="st">'3d'</span>)</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>        sp<span class="op">=</span>ax.scatter(Y[:,<span class="dv">0</span>],Y[:,<span class="dv">1</span>],Y[:,<span class="dv">2</span>],c<span class="op">=</span>labels,marker<span class="op">=</span><span class="st">"."</span>, cmap<span class="op">=</span><span class="st">"viridis"</span>)</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>        plt.colorbar(sp)</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>    plt.title(title)</span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell" data-execution_count="13">
@@ -1357,13 +1356,12 @@ Normalize the numerical data
 <div class="cell" data-execution_count="23">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">#plot the result</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>fig,ax<span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>,sharex<span class="op">=</span><span class="va">True</span>, figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">5</span>))</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>fig.suptitle(<span class="st">'Score vs Gender'</span>)</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(data<span class="op">=</span>df,x<span class="op">=</span><span class="st">'Gender'</span>,y<span class="op">=</span><span class="st">'Nscore'</span>,hue<span class="op">=</span><span class="st">'label_db'</span>,ax<span class="op">=</span>ax[<span class="dv">0</span>])</span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(data<span class="op">=</span>df,x<span class="op">=</span><span class="st">'Gender'</span>,y<span class="op">=</span><span class="st">'Escore'</span>,hue<span class="op">=</span><span class="st">'label_db'</span>,ax<span class="op">=</span>ax[<span class="dv">1</span>])</span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_title(<span class="st">'Nscore vs Gender'</span>)</span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_title(<span class="st">'Escore vs Gender'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>fig,ax<span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>,sharex<span class="op">=</span><span class="va">True</span>, figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">5</span>))</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>fig.suptitle(<span class="st">'Score vs Gender'</span>)</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(data<span class="op">=</span>df,x<span class="op">=</span><span class="st">'Gender'</span>,y<span class="op">=</span><span class="st">'Nscore'</span>,hue<span class="op">=</span><span class="st">'label_db'</span>,ax<span class="op">=</span>ax[<span class="dv">0</span>])</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(data<span class="op">=</span>df,x<span class="op">=</span><span class="st">'Gender'</span>,y<span class="op">=</span><span class="st">'Escore'</span>,hue<span class="op">=</span><span class="st">'label_db'</span>,ax<span class="op">=</span>ax[<span class="dv">1</span>])</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_title(<span class="st">'Nscore vs Gender'</span>)</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_title(<span class="st">'Escore vs Gender'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="23">
 <pre><code>Text(0.5, 1.0, 'Escore vs Gender')</code></pre>
