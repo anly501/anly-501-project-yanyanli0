@@ -4,7 +4,7 @@
     
 <head>
     <title>501 project</title>
-
+    <meta name="viewport" content="width=device-width">
     <!-- point to css stylesheet -->
     <link rel="stylesheet" href="styles.css">
  
@@ -12,7 +12,6 @@
 
 
 <body>
-
 
 
 <!-- HEADER BAR -->
@@ -30,8 +29,6 @@
         <div class="dropdown-content">
 
         <a href="https://github.com/anly501/anly-501-project-yanyanli0">GitHub Repo</a>
-        <a href="./pages/html-cheatsheet/cheatsheet.html">html</a>
-        <a href="./pages/markdown-cheatsheet/markdown-cheatsheet.html">markdown</a>
         </div>
     </li>
     
@@ -44,7 +41,6 @@
         <!-- open in new tab use:   <a href="https://www.google.com/" target="_blank">google</a>-->
         <!-- open in same tab use:  <a href="https://www.google.com/">google</a>-->
          <a href="https://github.com/anly501/anly-501-project-yanyanli0/tree/main/codes/01-data-gathering" target="_blank">Small data</a>
-        <a href="https://www.wikipedia.org/" target="_blank">wikipedia</a>
     
         </div>
     </li>
@@ -54,20 +50,21 @@
     <li class="dropdown">
         <a href="javascript:void(0)" class="dropbtn">Data Cleaning</a>
         <div class="dropdown-content">
-        <a href="./pages/datacleaningR.htm">Data Cleaning R</a>
+        
         <a href="./pages/datacleaning_Py.html">Data Cleaning Python</a>
+        <a href="./pages/datacleaning_R.html">Data Cleaning R</a>
 
     </div>
     </li>
     <li><a href="./pages/word_cloud_tone.html">Exploring data</a></li>
 
     <li class="dropdown">
-        <a href="javascript:void(0)" class="dropbtn">Naïve Bayes</a>
+        <a href="javascript:void(0)" class="dropbtn">Naive Bayes</a>
         
         <div class="dropdown-content">
 
-        <a href="./pages/NB_PY.html">Naïve Bayes Python</a>
-        <a href="./pages/NB_R.html">Naïve Bayes R</a>
+        <a href="./pages/NB_PY.html">Naive Bayes Python</a>
+        <a href="./pages/NB_R.html">Naive Bayes R</a>
         </div>
     </li>
 
@@ -124,19 +121,20 @@
 
 
 <!-- USE A TABLE TO ORGANIZE/FORMAT THE WEBPAGE -->
-<table>
+
     <!--TABLE ROW-1-->
-   <tr>
+
       <!--ROW-1 COL-1-->
-      <td>
-            <img src="images/yanyan.jpg" width="320" height="400">
-      </td>
-      
-      <!--ROW-1 COL-2-->
-      <td>
-            
-        <h2 style="text-align:left; color:blue;">About me</h2>
+
+
+                 
         
+        <!--div class="image">
+        <img src="images/yanyan.jpg" width="320" height="400"-->
+
+
+    <div class="column-2">
+        <h2 >About me</h2>
         <p  style="font: size 15px;">My name is YanYan Li, 
             and I got my bachelor degree at University At Buffalo. 
             Go Bulls! I am a first-generation international student, 
@@ -145,50 +143,38 @@
             I am also excited to further my education by pursuing a master
              degree in Georgetown University. I would also like to continue working 
              under a professor to create amazing research so I can grow and develop professionally. 
-        </br>
+            </p>  
+        <br>
+        <p  style="font: size 15px;">
             Other than continuing my study in the US, I enjoy being a food blogger in my social 
             media. I find great value in showing my international friends the different types of
              foods in the USA. This helps me share my happiness with everyone. I hope by continuing 
-             my education in the US I can enjoy the lifestyle I am currently living in right now.</p>
-
-      </td>
-         
-         
-   </tr>
+             my education in the US I can enjoy the lifestyle I am currently living in right now.
+            </p>  
+        <br>
+        <p  style="font: size 15px;">
+        Every day, I meet new people and learn about their backgrounds, experiences, and interests. 
+        I’ve always been curious about why people do the things they do, 
+        so in this blog post, I want to share my story and explain why I decided to pursue a degree in architecture. 
+        Stay tuned for more posts in the future!
+            </p>
+            <br>
+            <p  style="font: size 15px;">
+            As a Chinese international student, I have been asked many times about my food, 
+            studies and hobbies. People are curious about what life is like for students from
+             other countries, and especially in the U.S. So here is a little bit about me and
+              what I love to do. I love to cook and eat! My favorite cuisine is Sichuan food, which is spicy and flavorful.
+               In my spare time, I enjoy playing the guitar and watching Netflix (especially shows with complex plot lines like "Stranger Things"!). 
+               Thank you for reading – please feel free to reach out me!
+            </p>
+    </div>
+    <div class="column-2 large-profile">
+    </div>
 
     <!--ROW-2-->
-   <tr>
+
       <!--ROW-2 COL-1-->
-      <td>
-        
 
-        <h2 style="text-align:left; color:blue;">Academic Interests</h2>
-            
-        <p> 
-        Name: Yanyan Li
-        <br> 
-        GU ID: yl1494
-        </p> 
-        
-     
- 
-      </td>
-      
-      <!--ROW-2 COL-2-->
-      <td>
-
-         <h2 style="text-align:left; color:blue;">Education</h2>
-
-  <p>2017: XYZ </p> 
-  <p>2014: XYZ </p> 
-  <p>2011: XYZ </p> 
-
-
-      </td>
-   </tr>
    
-</table>
-
-
 </body>
 </html>
