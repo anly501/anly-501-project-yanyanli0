@@ -8,7 +8,7 @@
 
 body {
     font-family:verdana;
-    background-image: url(./bk.jpg);
+    background-image: url(./images/bk.jpg);
     background-position: 0 1000px;
     background-size: cover;
 
@@ -37,7 +37,7 @@ body {
   }
 
 .large-profile {
-    background: url('yanyan.jpg');
+    background: url('./images/yanyan.jpg');
     background-size: contain;
     background-position: right;
     background-repeat: no-repeat;
