@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.2.242">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<link rel="stylesheet" href="styles.css" type="text/css">
+
 
 <title>datacleaning_py</title>
 <style>
@@ -133,7 +133,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1>Introduction to Data Cleaning</h1>
 <p>Data cleaning is the process of fixing or removing incorrect, corrupted, incorrectly formatted, duplicate, or incomplete data within a dataset. Data cleaning is an important step in data analysis and data science, as it can help to ensure that results are accurate and reliable. There are many different approaches to data cleaning, and the best approach to use will often depend on the nature and size of the data set. However, some common data cleaning tasks include identifying and correcting errors, dealing with missing data, and identifying and removing duplicate records. data cleaning can be a time-consuming task, but it is essential for ensuring that data sets are fit for purpose.</p>
 <p>In this section, I will use the tweet dataset that I collected from the last section and clean the it. Let’s import some packages that will be used later</p>
-<div class="cell">
+<div class="cell" data-execution_count="28">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">### IMPORT PACKAGES </span></span>
@@ -152,14 +152,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="pre-review-of-dataset" class="level1">
 <h1>Pre review of Dataset</h1>
-<div class="cell" data-execution_count="5">
+<div class="cell" data-execution_count="29">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#read csv tweet</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>tweet_df<span class="op">=</span>pd.read_csv(<span class="st">"./tweets_data_2500_USA.csv"</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>tweet_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="5">
+<div class="cell-output cell-output-display" data-execution_count="29">
 
 <div>
 
@@ -275,14 +275,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1>Data Cleaning</h1>
 <section id="remove-unrelated-columns" class="level2">
 <h2 class="anchored" data-anchor-id="remove-unrelated-columns">Remove unrelated columns</h2>
-<div class="cell" data-execution_count="9">
+<div class="cell" data-execution_count="30">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#choose the columns</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>tweet_df<span class="op">=</span>tweet_df[[<span class="st">'Date'</span>,<span class="st">'Language'</span>,<span class="st">'Text'</span>]]</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>tweet_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="9">
+<div class="cell-output cell-output-display" data-execution_count="30">
 
 <div>
 
@@ -372,14 +372,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="choose-the-english-user" class="level2">
 <h2 class="anchored" data-anchor-id="choose-the-english-user">Choose the English User</h2>
-<div class="cell" data-execution_count="8">
+<div class="cell" data-execution_count="31">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#choose language = en only </span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>tweet_df<span class="op">=</span>tweet_df[tweet_df[<span class="st">'Language'</span>]<span class="op">==</span><span class="st">'en'</span>]</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>tweet_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="8">
+<div class="cell-output cell-output-display" data-execution_count="31">
 
 <div>
 
@@ -469,13 +469,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="check-empty-rows-in-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="check-empty-rows-in-dataset">Check empty rows in dataset</h2>
-<div class="cell" data-execution_count="68">
+<div class="cell" data-execution_count="32">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#check if any NaN in the df</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>tweet_df.isna().<span class="bu">any</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="68">
+<div class="cell-output cell-output-display" data-execution_count="32">
 <pre><code>Date        False
 Language    False
 Text        False
@@ -486,14 +486,14 @@ dtype: bool</code></pre>
 </section>
 <section id="remove-the-duplicated-rows-in-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="remove-the-duplicated-rows-in-dataset">Remove the Duplicated rows in dataset</h2>
-<div class="cell" data-execution_count="10">
+<div class="cell" data-execution_count="33">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#remove duplicated rows</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>tweet_df<span class="op">=</span> tweet_df.drop_duplicates()</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>tweet_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="10">
+<div class="cell-output cell-output-display" data-execution_count="33">
 
 <div>
 
@@ -580,14 +580,14 @@ dtype: bool</code></pre>
 </div>
 </div>
 <p>There is no duplicated row in the dataset</p>
-<div class="cell" data-execution_count="69">
+<div class="cell" data-execution_count="34">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#get tweet</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>tweet<span class="op">=</span>tweet_df[<span class="st">'Text'</span>]</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>tweet[:<span class="dv">20</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="69">
+<div class="cell-output cell-output-display" data-execution_count="34">
 <pre><code>0     All the medical pain and all the taxes spent p...
 1     A good way to clean up your follower list is t...
 2     @1zzyzyx1 @MeidasTouch @CharlieCrist legalize ...
@@ -615,7 +615,7 @@ Name: Text, dtype: object</code></pre>
 <section id="count-the-words-before-cleaning-the-text" class="level2">
 <h2 class="anchored" data-anchor-id="count-the-words-before-cleaning-the-text">Count the words before cleaning the text</h2>
 <p>Let’s count each word amount 2500 tweets</p>
-<div class="cell" data-execution_count="70">
+<div class="cell" data-execution_count="35">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># count each word</span></span>
@@ -625,26 +625,31 @@ Name: Text, dtype: object</code></pre>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>vocabulary_before <span class="op">=</span> {k: v <span class="cf">for</span> k, v <span class="kw">in</span> <span class="bu">sorted</span>(vocabulary_before.items(), key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">1</span>],reverse<span class="op">=</span><span class="va">True</span>)}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-execution_count="71">
+<div class="cell" data-execution_count="51">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># distribution of frequency count for the first 20 words</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>plt.bar(<span class="bu">list</span>(vocabulary_before.keys())[:<span class="dv">20</span>],<span class="bu">list</span>(vocabulary_before.values())[:<span class="dv">20</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> plt.figure()</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>f.set_figwidth(<span class="dv">10</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>f.set_figheight(<span class="dv">6</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Word Counts for First 20 words'</span>, fontsize<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Word'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Count'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>plt.bar(<span class="bu">list</span>(vocabulary_before.keys())[:<span class="dv">20</span>],<span class="bu">list</span>(vocabulary_before.values())[:<span class="dv">20</span>])</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="71">
-<pre><code>&lt;BarContainer object of 20 artists&gt;</code></pre>
-</div>
 <div class="cell-output cell-output-display">
-<p><img src="datacleaning_Py_files/figure-html/cell-10-output-2.png" class="img-fluid"></p>
+<p><img src="datacleaning_Py_files/figure-html/cell-10-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 <p>Above picture is the distribution of first 20 words.</p>
-<div class="cell" data-execution_count="72">
+<div class="cell" data-execution_count="37">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># random 20 words</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">list</span>(vectorizer_before.get_feature_names_out())[:<span class="dv">150</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># random 20 words</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">list</span>(vectorizer_before.get_feature_names_out())[:<span class="dv">150</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>['00', '000', '0001', '002wsiszo2', '00ensfupua', '00usd', '01yhjge9yb', '03kxndbiws', '0600', '08', '08krz2qf6r', '08krz2qmvz', '08wwsbpzqm', '09', '0ahww5s89w', '0cannabis', '0cy4xp2tyo', '0sk5yurcld', '0tkok78k6o', '0whlv4ae2k', '0wtobhtc20', '0wvvwn3exm', '0xactivx', '0xuu0wcofc', '10', '100', '1000', '100000000', '10009', '100pcs', '100zillion', '101', '1011', '107sfkttno', '10am', '10ft', '10k', '10kusd', '10million', '10th', '10x', '11', '113', '113b', '118', '11am', '11krkts', '11pm', '11th', '12', '120', '122', '122usd', '12th', '12vvrqk7rk', '13', '130', '14', '140l8ioigx', '143vinyldotcom', '15', '150m', '15eepzquvn', '15mg', '16', '161', '165', '167', '17', '1744195', '18', '180', '18306', '1835974', '1844', '185668232', '1887', '18g', '19', '190', '1933', '1960s', '1970s', '1974', '1980', '1987', '1990s', '1996biggs', '1999', '1afyxaksy8', '1dmhhlf9fr', '1etzm5bbk2', '1f8fzlkhmj', '1fiycpyc2q', '1fsukoqhuf', '1g', '1glswczxby', '1gyn52lgnq', '1j0bhsaf32', '1ji1l5v6xb', '1kz3qi3oyg', '1lj607uj8q', '1m', '1qycnqw0hh', '1s61vkxzsc', '1st', '1vdfgoszcj', '1vp2s47ujp', '1w48yr818q', '1xudzktwvz', '1zzyzyx1', '20', '200', '2000', '2007', '200x', '201', '2010', '2011', '2014', '2016', '2018', '2019', '2020', '2021', '2022', '2023', '2024', '205', '20yr', '21', '210', '2188', '21andup', '21s', '21st', '22', '2240', '22gejup627', '23', '23hahpok6r', '24', '2497', '24ghgvb9jw', '24th', '25', '250', '250k', '250mg', '250usd']</code></pre>
@@ -654,58 +659,64 @@ Name: Text, dtype: object</code></pre>
 </section>
 <section id="remove-the-punctuation-dights-symbols-hashtags-etc.-non-word-characters." class="level2">
 <h2 class="anchored" data-anchor-id="remove-the-punctuation-dights-symbols-hashtags-etc.-non-word-characters.">Remove the punctuation, dights, symbols, hashtags etc. non-word characters.</h2>
-<div class="cell" data-execution_count="73">
+<div class="cell" data-execution_count="38">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#code from https://towardsdatascience.com/cleaning-text-data-with-python-b69b47b97b76</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove the punctuation, dights, symbols, hashtags etc. non-word characters.</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>stop_words <span class="op">=</span> stopwords.words(<span class="st">"english"</span>)</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>wordnet <span class="op">=</span> WordNetLemmatizer()</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> text_preproc(x):</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> x.lower()</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> <span class="st">' '</span>.join([word <span class="cf">for</span> word <span class="kw">in</span> x.split(<span class="st">' '</span>) <span class="cf">if</span> word <span class="kw">not</span> <span class="kw">in</span> stop_words])</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> x.encode(<span class="st">'ascii'</span>, <span class="st">'ignore'</span>).decode()</span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> re.sub(<span class="vs">r'https*\S+'</span>, <span class="st">' '</span>, x)</span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> re.sub(<span class="vs">r'@\S+'</span>, <span class="st">' '</span>, x)</span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> re.sub(<span class="vs">r'#\S+'</span>, <span class="st">' '</span>, x)</span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> re.sub(<span class="vs">r'\'\w+'</span>, <span class="st">''</span>, x)</span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> re.sub(<span class="st">'[</span><span class="sc">%s</span><span class="st">]'</span> <span class="op">%</span> re.escape(string.punctuation), <span class="st">' '</span>, x)</span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> re.sub(<span class="vs">r'\w*\d+\w*'</span>, <span class="st">''</span>, x)</span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> re.sub(<span class="vs">r'\s{2,}'</span>, <span class="st">' '</span>, x)</span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> x</span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>tweet_df[<span class="st">'clean_text'</span>] <span class="op">=</span> tweet_df[<span class="st">'Text'</span>].<span class="bu">apply</span>(text_preproc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#code from https://towardsdatascience.com/cleaning-text-data-with-python-b69b47b97b76</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove the punctuation, dights, symbols, hashtags etc. non-word characters.</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>stop_words <span class="op">=</span> stopwords.words(<span class="st">"english"</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>wordnet <span class="op">=</span> WordNetLemmatizer()</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> text_preproc(x):</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> x.lower()</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> <span class="st">' '</span>.join([word <span class="cf">for</span> word <span class="kw">in</span> x.split(<span class="st">' '</span>) <span class="cf">if</span> word <span class="kw">not</span> <span class="kw">in</span> stop_words])</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> x.encode(<span class="st">'ascii'</span>, <span class="st">'ignore'</span>).decode()</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> re.sub(<span class="vs">r'https*\S+'</span>, <span class="st">' '</span>, x)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> re.sub(<span class="vs">r'@\S+'</span>, <span class="st">' '</span>, x)</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> re.sub(<span class="vs">r'#\S+'</span>, <span class="st">' '</span>, x)</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> re.sub(<span class="vs">r'\'\w+'</span>, <span class="st">''</span>, x)</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> re.sub(<span class="st">'[</span><span class="sc">%s</span><span class="st">]'</span> <span class="op">%</span> re.escape(string.punctuation), <span class="st">' '</span>, x)</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> re.sub(<span class="vs">r'\w*\d+\w*'</span>, <span class="st">''</span>, x)</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> re.sub(<span class="vs">r'\s{2,}'</span>, <span class="st">' '</span>, x)</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> x</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>tweet_df[<span class="st">'clean_text'</span>] <span class="op">=</span> tweet_df[<span class="st">'Text'</span>].<span class="bu">apply</span>(text_preproc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-execution_count="74">
+<div class="cell" data-execution_count="39">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># count each word after cleaning</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>vectorizer_after<span class="op">=</span>CountVectorizer(stop_words<span class="op">=</span><span class="st">'english'</span>,analyzer <span class="op">=</span> <span class="st">'word'</span>)</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>after  <span class="op">=</span>  vectorizer_after.fit_transform(tweet_df[<span class="st">'clean_text'</span>])</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>vocabulary_after<span class="op">=</span>vectorizer_after.vocabulary_</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>vocabulary_after <span class="op">=</span> {k: v <span class="cf">for</span> k, v <span class="kw">in</span> <span class="bu">sorted</span>(vocabulary_after.items(), key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">1</span>],reverse<span class="op">=</span><span class="va">True</span>)}   </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># count each word after cleaning</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>vectorizer_after<span class="op">=</span>CountVectorizer(stop_words<span class="op">=</span><span class="st">'english'</span>,analyzer <span class="op">=</span> <span class="st">'word'</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>after  <span class="op">=</span>  vectorizer_after.fit_transform(tweet_df[<span class="st">'clean_text'</span>])</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>vocabulary_after<span class="op">=</span>vectorizer_after.vocabulary_</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>vocabulary_after <span class="op">=</span> {k: v <span class="cf">for</span> k, v <span class="kw">in</span> <span class="bu">sorted</span>(vocabulary_after.items(), key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">1</span>],reverse<span class="op">=</span><span class="va">True</span>)}   </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-execution_count="76">
+<div class="cell" data-execution_count="40">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#the first 150 words</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>vocabulary_after<span class="op">=</span>vectorizer_after.vocabulary_</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">list</span>(vectorizer_after.get_feature_names_out())[:<span class="dv">150</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#the first 150 words</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>vocabulary_after<span class="op">=</span>vectorizer_after.vocabulary_</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">list</span>(vectorizer_after.get_feature_names_out())[:<span class="dv">150</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>['aahn', 'aaron', 'ab', 'abc', 'ability', 'able', 'abolished', 'abolitionism', 'abortion', 'abortions', 'abroad', 'absolute', 'absolutely', 'abt', 'abundance', 'abuse', 'abusers', 'accept', 'acceptable', 'accepted', 'accepts', 'access', 'accessory', 'accident', 'accomplished', 'according', 'account', 'accountant', 'accounts', 'accretive', 'accumulate', 'accurately', 'accustomed', 'ace', 'achieved', 'achievement', 'achievements', 'acid', 'acquiring', 'acquisition', 'acre', 'acres', 'acro', 'act', 'acted', 'acting', 'action', 'actions', 'active', 'activist', 'activists', 'activities', 'activity', 'actual', 'actually', 'ad', 'adam', 'adapter', 'add', 'added', 'adderall', 'addict', 'addicted', 'addiction', 'addictions', 'addictive', 'addicts', 'additionally', 'additives', 'addre', 'address', 'addressing', 'adelanto', 'adequate', 'adhd', 'adjustments', 'admin', 'administration', 'admiring', 'admission', 'admitted', 'adolescents', 'adult', 'adulting', 'adults', 'advance', 'advanced', 'adventure', 'advertising', 'advice', 'advisor', 'advisory', 'advocate', 'advocated', 'advocating', 'aew', 'af', 'afc', 'affected', 'affects', 'affiliated', 'affiliation', 'affirm', 'afford', 'affordable', 'affordably', 'aficionado', 'afraid', 'african', 'afro', 'afternoon', 'afterparty', 'afterschool', 'ag', 'age', 'ageism', 'agency', 'agenda', 'aggressive', 'aging', 'ago', 'agree', 'agreed', 'agreement', 'agrees', 'agricultural', 'agriculture', 'ahead', 'ahem', 'ahhh', 'ahhs', 'ai', 'aid', 'aids', 'aileen', 'ain', 'ainn', 'aint', 'air', 'airbnb', 'airplane', 'airport', 'ak', 'aka', 'al', 'alabama', 'alabaman', 'alarm', 'albert', 'alberta']</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="77">
+<div class="cell" data-execution_count="52">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># distribution of frequency of first 20 word</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>)</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>plt.bar(<span class="bu">list</span>(vocabulary_after.keys())[:<span class="dv">20</span>],<span class="bu">list</span>(vocabulary_after.values())[:<span class="dv">20</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># distribution of frequency of first 20 word</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> plt.figure()</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>f.set_figwidth(<span class="dv">10</span>)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>f.set_figheight(<span class="dv">6</span>)</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Word Counts for First 20 words'</span>, fontsize<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Word'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Count'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>plt.bar(<span class="bu">list</span>(vocabulary_after.keys())[:<span class="dv">20</span>],<span class="bu">list</span>(vocabulary_after.values())[:<span class="dv">20</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="77">
+<div class="cell-output cell-output-display" data-execution_count="52">
 <pre><code>&lt;BarContainer object of 20 artists&gt;</code></pre>
 </div>
 <div class="cell-output cell-output-display">
