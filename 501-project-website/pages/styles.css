@@ -1,0 +1,36 @@
+
+body {
+    font-family:verdana;
+    background-image: url(./images/bk.jpg);
+    background-position: 0 1000px;
+    background-size: cover;
+}
+
+#header {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #707374;
+    max-width:auto;
+}
+
+#header li {
+    float: left;
+}
+
+#header li a, .dropbtn  {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 20px 25px;
+    text-decoration: none;
+    font-size: 24px;
+}
+
+#header a:hover {
+    background-color: grey;
+}
+
+
+
