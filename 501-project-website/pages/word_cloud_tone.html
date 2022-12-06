@@ -84,8 +84,8 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
-<script src="nav.js"></script>
 
+<script src="nav.js"></script>
 <script src="word_cloud_tone_files/libs/clipboard/clipboard.min.js"></script>
 <script src="word_cloud_tone_files/libs/quarto-html/quarto.js"></script>
 <script src="word_cloud_tone_files/libs/quarto-html/popper.min.js"></script>
@@ -123,8 +123,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#count-vectorizer" id="toc-count-vectorizer" class="nav-link" data-scroll-target="#count-vectorizer">Count Vectorizer</a></li>
   <li><a href="#sentiment-score" id="toc-sentiment-score" class="nav-link" data-scroll-target="#sentiment-score">Sentiment Score</a></li>
   </ul></li>
-  <li><a href="#open-fda-criminal-rate-data" id="toc-open-fda-criminal-rate-data" class="nav-link" data-scroll-target="#open-fda-criminal-rate-data">Open FDA Criminal Rate Data</a>
+  <li><a href="#open-fda-crime-rate-data" id="toc-open-fda-crime-rate-data" class="nav-link" data-scroll-target="#open-fda-crime-rate-data">Open FDA Crime Rate Data</a>
   <ul class="collapse">
+  <li><a href="#distribution-of-crime-rate-by-states" id="toc-distribution-of-crime-rate-by-states" class="nav-link" data-scroll-target="#distribution-of-crime-rate-by-states">Distribution of Crime Rate by States</a></li>
+  <li><a href="#distribution-of-crime-rate" id="toc-distribution-of-crime-rate" class="nav-link" data-scroll-target="#distribution-of-crime-rate">Distribution of Crime rate</a></li>
   <li><a href="#statics-values-of-dataset" id="toc-statics-values-of-dataset" class="nav-link" data-scroll-target="#statics-values-of-dataset">Statics values of Dataset</a></li>
   </ul></li>
   </ul>
@@ -137,7 +139,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="introduction-to-data-exploring" class="level1">
 <h1>Introduction to Data Exploring</h1>
 <p>Data exploration is the initial step in data analysis, where users explore a large data set in an unstructured way to uncover initial patterns, characteristics, and points of interest. Data exploration is a crucial part of data science, and it’s important to approach it with curiosity and an open mind. This process isn’t meant to reveal every bit of information a dataset holds, but rather to help create a broad picture of important trends and major points to study in greater detail. Data exploration can be done manually, through visual inspection of data, or by using automated methods such as data mining. Whichever approach you take, the goal is the same: to get a better understanding of your data so that you can make more informed decisions about how to analyze it.</p>
-<div class="cell" data-execution_count="13">
+<div class="cell" data-execution_count="1">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import packages</span></span>
@@ -158,7 +160,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="tweets-dataset" class="level1">
 <h1>Tweets Dataset</h1>
 <p>Go to the Data Gathering tab for more details on how the data being collected.</p>
-<div class="cell" data-execution_count="14">
+<div class="cell" data-execution_count="2">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#read file</span></span>
@@ -166,7 +168,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>content<span class="op">=</span>tweet[<span class="st">'clean_text'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-execution_count="15">
+<div class="cell" data-execution_count="3">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#join all tweet into a big chunk of string</span></span>
@@ -177,7 +179,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <section id="world-cloud" class="level2">
 <h2 class="anchored" data-anchor-id="world-cloud">World Cloud</h2>
-<div class="cell" data-execution_count="16">
+<div class="cell" data-execution_count="4">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#plot the wordcloud</span></span>
@@ -207,7 +209,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3 class="anchored" data-anchor-id="remove-stop-words-and-word-stemminglemmatization">Remove Stop words and Word Stemming/Lemmatization</h3>
 <p>Stopwords are the most common words of a language like ‘I’, ‘this’, ‘is’, ‘in’ which do not add much value to the meaning of a document. These values are removed to decrease the dataset size and increase focus on meaningful words.</p>
 <p>Stemming is a process that stems or removes last few characters from a word, often leading to incorrect meanings and spelling. Lemmatization considers the context and converts the word to its meaningful base form</p>
-<div class="cell" data-execution_count="17">
+<div class="cell" data-execution_count="5">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importing spacy</span></span>
@@ -226,12 +228,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   from .autonotebook import tqdm as notebook_tqdm</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="18">
+<div class="cell" data-execution_count="6">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>tweet</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="18">
+<div class="cell-output cell-output-display" data-execution_count="6">
 
 <div>
 
@@ -359,7 +361,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="count-vectorizer" class="level2">
 <h2 class="anchored" data-anchor-id="count-vectorizer">Count Vectorizer</h2>
 <p>CountVectorizer is a great tool provided by the scikit-learn library in Python. It is used to transform a given text into a vector on the basis of the frequency (count) of each word that occurs in the entire text. This is helpful when we have multiple such texts, and we wish to convert each word in each text into vectors (for using in further text analysis). CountVectorizer essentially builds a vocabulary from all the available documents and assigns a unique integer ID to each word. The algorithm then counts the number of times each word appears in each document, and finally assigns a normalized tf-idf score to each word. CountVectorizer is therefore a powerful tool that can be used to convert texts into vectors, which can then be used in various downstream tasks such as machine learning or text analysis.</p>
-<div class="cell" data-execution_count="19">
+<div class="cell" data-execution_count="7">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># VERCTORIZE</span></span>
@@ -367,13 +369,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>vv  <span class="op">=</span>  vectorizer.fit_transform(content)   </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-execution_count="20">
+<div class="cell" data-execution_count="8">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>count_vect_df <span class="op">=</span> pd.DataFrame(vv.todense(), columns<span class="op">=</span>vectorizer.get_feature_names_out())</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>count_vect_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="20">
+<div class="cell-output cell-output-display" data-execution_count="8">
 
 <div>
 
@@ -680,7 +682,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="sentiment-score" class="level2">
 <h2 class="anchored" data-anchor-id="sentiment-score">Sentiment Score</h2>
 <p>VADER’s SentimentIntensityAnalyzer() takes in a string and returns a dictionary of scores in each of four categories: negative, neutral and positive. Here I am going to use the function called “SentimentIntensityAnalyzer” to analysis the tone of each tweets. For each tweet, we’ll get four values, corresponding to “negative”, “neutral”, “positive” and “compound”. The first three values will be in the range 0 to 1, the last value representing the combination of the first three values will be in the range -1 to 1. If the tone of this tweet represents a like, the compound value will be close to 1, and if the tone of this tweet is a hate, it will be close to -1.</p>
-<div class="cell" data-execution_count="21">
+<div class="cell" data-execution_count="9">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the sore of sentiment</span></span>
@@ -694,7 +696,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>score_df <span class="op">=</span> pd.DataFrame.from_records(score)</span>
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>score_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="21">
+<div class="cell-output cell-output-display" data-execution_count="9">
 
 <div>
 
@@ -793,12 +795,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>This is the sentiment score for each tweet.</p>
-<div class="cell" data-execution_count="22">
+<div class="cell" data-execution_count="10">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>score_df.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="22">
+<div class="cell-output cell-output-display" data-execution_count="10">
 
 <div>
 
@@ -875,7 +877,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>Some statistics for the 2500 tweets sentiment scores. <br> As we can see the values from the table, “neutral” has hightest mean comparing the “negative” and “positive” score, which means majority of people have neutral feeling about it <br> Take look at “compound” values, its mean are 0.093621 which close to 0 so we can confirm that most people don’t care about the weed.</p>
-<div class="cell" data-execution_count="44">
+<div class="cell" data-execution_count="11">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
@@ -894,7 +896,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p><br> The histogram provides us more straight forward information. From this histogram, we can see that the orange category occupies a higher score, which means that more people are neutral about cannabis. <br> It actually match the our descriptive statistical table of tone score.</p>
-<div class="cell">
+<div class="cell" data-execution_count="12">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#label the dataset with tone</span></span>
@@ -903,10 +905,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </section>
 </section>
-<section id="open-fda-criminal-rate-data" class="level1">
-<h1>Open FDA Criminal Rate Data</h1>
+<section id="open-fda-crime-rate-data" class="level1">
+<h1>Open FDA Crime Rate Data</h1>
 <p>Now let’s analysis numerical data. The plot shown below is the small area estimated crime rate. Based on two different types Alcohol and Drug, there are two different color of point.</p>
-<div class="cell">
+<section id="distribution-of-crime-rate-by-states" class="level2">
+<h2 class="anchored" data-anchor-id="distribution-of-crime-rate-by-states">Distribution of Crime Rate by States</h2>
+<div class="cell" data-execution_count="13">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -915,7 +919,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>alcohol_drug_df<span class="op">=</span>pd.read_csv(<span class="st">"alcohol_drug_df.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell">
+<div class="cell" data-execution_count="44">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a></span>
@@ -931,15 +935,92 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>From the graph, we can see almost all the blue points are on the top of orange points, which means the crime rate caused by alcohol is much higher than marijuana. Here is the descriptive statistics of crime rate table.</p>
-<section id="statics-values-of-dataset" class="level2">
-<h2 class="anchored" data-anchor-id="statics-values-of-dataset">Statics values of Dataset</h2>
-<div class="cell">
+<div class="cell" data-execution_count="53">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>alcohol_drug_df.groupby(by<span class="op">=</span><span class="st">"type"</span>).agg({<span class="st">"small_area_estimate"</span>:<span class="st">"mean"</span>,<span class="st">"rate_lower"</span>:<span class="st">'mean'</span>,<span class="st">'rate_upper'</span>:<span class="st">'mean'</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> plt.figure()</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>f.set_figwidth(<span class="dv">15</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>f.set_figheight(<span class="dv">6</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>ac_group<span class="op">=</span>alcohol_drug_df.groupby(by<span class="op">=</span>[<span class="st">"State"</span>,<span class="st">"type"</span>]).agg({<span class="st">"small_area_estimate"</span>:<span class="st">"mean"</span>})</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>ax<span class="op">=</span>sns.lineplot(ac_group,x<span class="op">=</span><span class="st">'State'</span>,y<span class="op">=</span><span class="st">'small_area_estimate'</span>,hue<span class="op">=</span><span class="st">'type'</span>).<span class="bu">set</span>(</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Mean Crime rate by States"</span>)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">90</span>)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'States'</span>,fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Counts'</span>,fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div class="cell-output cell-output-display">
+<p><img src="word_cloud_tone_files/figure-html/cell-16-output-1.png" class="img-fluid"></p>
 </div>
-<p>According to this table, we can pretty sure that drinking is more likely to commit crime than smoke marijuana</p>
+</div>
+<p>We can see the District of Columbia has highest crime rate on both Drug and Alcohol. Texas has lowest Drug crime rate and Utah has lowest Alcohol crime rate</p>
+</section>
+<section id="distribution-of-crime-rate" class="level2">
+<h2 class="anchored" data-anchor-id="distribution-of-crime-rate">Distribution of Crime rate</h2>
+<p>is there a specific location where crime is rampant? or is it evenly spread out? this infographic looks to answer that question, by mapping out the occurrences of different types of crime throughout the country. according to the data, certain parts of the US are more dangerous than others, but no one place is immune to criminal activity. check it out below to see how your state stacks up.</p>
+<div class="cell" data-execution_count="23">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> plt.figure()</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>f.set_figwidth(<span class="dv">10</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>f.set_figheight(<span class="dv">6</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Distribution of the Crime rate'</span>,fontsize<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Crime Rate'</span>,fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Counts'</span>,fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>sns.histplot(alcohol_drug_df,x <span class="op">=</span> <span class="st">'small_area_estimate'</span>, hue<span class="op">=</span><span class="st">'type'</span>)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<p><img src="word_cloud_tone_files/figure-html/cell-17-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>The graph above shows that the crime rate due to alcohol is much larger than the crime rate due to drugs. This could be because people who drink alcohol are more likely to commit crimes, or it could be that people who take drugs are more likely to commit crimes. Either way, this information can help us understand which substances are more dangerous and need to be regulated more closely.</p>
+</section>
+<section id="statics-values-of-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="statics-values-of-dataset">Statics values of Dataset</h2>
+<div class="cell" data-execution_count="15">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>alcohol_drug_df.groupby(by<span class="op">=</span><span class="st">"type"</span>).agg({<span class="st">"small_area_estimate"</span>:<span class="st">"mean"</span>,<span class="st">"rate_lower"</span>:<span class="st">'mean'</span>,<span class="st">'rate_upper'</span>:<span class="st">'mean'</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="15">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>small_area_estimate</th>
+      <th>rate_lower</th>
+      <th>rate_upper</th>
+    </tr>
+    <tr>
+      <th>type</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Alcohol</th>
+      <td>6.742624</td>
+      <td>5.482968</td>
+      <td>8.278860</td>
+    </tr>
+    <tr>
+      <th>Drug</th>
+      <td>2.701634</td>
+      <td>2.058495</td>
+      <td>3.547398</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<p>According to this table, we can pretty sure that drinking is more likely to commit crime than smoke marijuana.</p>
 </section>
 </section>
 
